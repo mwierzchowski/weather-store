@@ -1,0 +1,7 @@
+# Application info
+info.app.name: Weather Store
+
+# Actuator
+management:
+  endpoints.web.exposure.include: '*'
+  endpoint.health.show-details: always
