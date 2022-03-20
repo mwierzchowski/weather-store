@@ -22,7 +22,7 @@ bin/
 
 ### IntelliJ IDEA ###
 .idea/
-!.idea/runConfigurations
+!.idea/runConfigurations/
 *.iws
 *.iml
 *.ipr
