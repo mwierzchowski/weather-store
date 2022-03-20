@@ -1,5 +1,7 @@
 # Application info
-info.app.name: Weather Store
+info.app:
+  name: Weather Store
+  description: Storage service for weather conditions
 
 # Actuator
 management:
