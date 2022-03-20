@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Clean" type="MavenRunConfiguration" factoryName="Maven">
+  <configuration default="false" name="Run" type="MavenRunConfiguration" factoryName="Maven">
     <MavenSettings>
       <option name="myGeneralSettings" />
       <option name="myRunnerSettings" />
@@ -10,7 +10,8 @@
           </option>
           <option name="goals">
             <list>
-              <option value="Clean" />
+              <option value="clean" />
+              <option value="spring-boot:run" />
             </list>
           </option>
           <option name="pomFileName" />
