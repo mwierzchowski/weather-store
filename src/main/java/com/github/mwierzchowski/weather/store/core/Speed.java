@@ -2,30 +2,52 @@ package com.github.mwierzchowski.weather.store.core;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.stream.Stream;
 
 /**
- * Represents speed value in given units (see {@link SpeedUnit}).
+ * Represents speed value in given units (see {@link Unit}).
  * @author Marcin Wierzchowski
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Speed {
     /**
      * Speed value.
      */
-    @NotNull
-    @Min(0)
     private BigDecimal value;
 
     /**
-     * Speed unit (see {@link SpeedUnit}).
+     * Speed unit (see {@link Unit}).
      */
-    @NotNull
-    private SpeedUnit unit;
+    private Unit unit;
+
+    /**
+     * Units of speed
+     */
+    @AllArgsConstructor
+    public enum Unit {
+        KM_PER_H("km/h"),
+        M_PER_S("m/s"),
+        MI_PER_H("mph");
+
+        /**
+         * Symbol of unit.
+         */
+        @Getter
+        private final String symbol;
+
+        @Override
+        public String toString() {
+            return symbol;
+        }
+
+        public static Unit from(String symbol) {
+            return Stream.of(values())
+                    .filter(unit -> unit.symbol.equals(symbol))
+                    .findAny()
+                    .orElseThrow(() -> new IllegalArgumentException("Symbol " + symbol + " is not valid"));
+        }
+    }
 }

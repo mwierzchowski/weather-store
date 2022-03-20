@@ -1,29 +1,29 @@
 package com.github.mwierzchowski.weather.store.core;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 /**
- * Represents temperature value in given units (see {@link TemperatureUnit}).
+ * Represents temperature value in given units (see {@link Unit}).
  * @author Marcin Wierzchowski
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Temperature {
     /**
      * Temperature value.
      */
-    @NotNull
     private BigDecimal value;
 
     /**
-     * Temperature unit (see {@link TemperatureUnit}).
+     * Temperature unit (see {@link Unit}).
      */
-    @NotNull
-    private TemperatureUnit unit;
+    private Unit unit;
+
+    /**
+     * Units of temperature
+     */
+    public enum Unit {
+        C, F, K
+    }
 }
