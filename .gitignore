@@ -21,8 +21,8 @@ bin/
 !**/src/test/**/bin/
 
 ### IntelliJ IDEA ###
-.idea
-!/.idea/runConfigurations
+!/.idea/runConfigurations/
+.idea/
 *.iws
 *.iml
 *.ipr
@@ -35,4 +35,5 @@ bin/
 
 ### VS Code ###
 .vscode/
+
 
