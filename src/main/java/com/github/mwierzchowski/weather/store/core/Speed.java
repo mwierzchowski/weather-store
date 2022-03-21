@@ -44,6 +44,9 @@ public class Speed {
         }
 
         public static Unit from(String symbol) {
+            if (symbol == null) {
+                return null;
+            }
             return Stream.of(values())
                     .filter(unit -> unit.symbol.equals(symbol))
                     .findAny()
