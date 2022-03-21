@@ -4,7 +4,7 @@ COPY pom.xml pom.xml
 RUN mvn dependency:go-offline
 COPY src src
 COPY .git .git
-RUN mvn clean verify
+RUN mvn clean verify site
 
 FROM eclipse-temurin:17.0.2_8-jre as image
 RUN groupadd java && useradd --gid java --groups java java

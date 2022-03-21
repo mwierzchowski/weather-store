@@ -11,6 +11,8 @@
 
     <properties>
         <java.version>15</java.version>
+        <site-plugin.version>3.11.0</site-plugin.version>
+        <project-info-plugin.version>3.2.2</project-info-plugin.version>
         <gmavenplus-plugin.version>1.13.1</gmavenplus-plugin.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <springdoc.version>1.6.6</springdoc.version>
@@ -114,6 +116,26 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- Fix for issues with site plugin failing on missing class -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>${site-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>${project-info-plugin.version}</version>
+            </plugin>
         </plugins>
     </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </reporting>
 </project>
