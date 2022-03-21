@@ -3,7 +3,7 @@ WORKDIR /usr/build
 COPY pom.xml pom.xml
 RUN mvn dependency:go-offline
 COPY src src
-RUN mvn clean package
+RUN mvn clean verify
 
 FROM eclipse-temurin:17.0.2_8-jre as image
 RUN groupadd java && useradd --gid java --groups java java
