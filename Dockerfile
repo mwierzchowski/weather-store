@@ -3,6 +3,7 @@ WORKDIR /usr/build
 COPY pom.xml pom.xml
 RUN mvn dependency:go-offline
 COPY src src
+COPY .git .git
 RUN mvn clean verify
 
 FROM eclipse-temurin:17.0.2_8-jre as image
