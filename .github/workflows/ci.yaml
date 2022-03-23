@@ -18,7 +18,7 @@ jobs:
       - name: Set up Maven
         uses: stCarolas/setup-maven@v4.3
         with:
-          maven-version: 3.8.2
+          maven-version: 3.8.4
 
       - name: Check quality
         run: mvn verify surefire-report:report-only --no-transfer-progress
