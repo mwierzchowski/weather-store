@@ -20,7 +20,7 @@ jobs:
         with:
           maven-version: 3.8.4
 
-      - name: Check quality
+      - name: Check quality native
         run: mvn verify surefire-report:report-only --no-transfer-progress
 
 
