@@ -1,13 +1,18 @@
 name: CI
 on: push
 
-env:
-  test: ttttt
-
 jobs:
   Build:
     runs-on: ubuntu-latest
     steps:
+      - name: Debug
+        uses: |
+          echo $GITHUB_ACTOR
+          echo $GITHUB_REPOSITORY
+          echo $GITHUB_REPOSITORY_OWNER
+          echo $GITHUB_WORKFLOW
+          echo $GITHUB_WORKSPACE
+
       - name: Checkout
         uses: actions/checkout@v3
 
