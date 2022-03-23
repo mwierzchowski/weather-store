@@ -53,5 +53,5 @@ jobs:
           cache-to: type=gha,scope=${{ github.WORKFLOW }}
 
       - name: Check quality
-        uses: mwierzchowski/weather-store/quality-check:latest
+        uses: docker://mwierzchowski/weather-store/quality-check:latest
 
