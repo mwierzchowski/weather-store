@@ -28,9 +28,10 @@ jobs:
           cache-to: type=gha,scope=${{ github.WORKFLOW }}
 
   Test:
-    container: mwierzchowski/weather-store-builder:latest
+    runs-on: ubuntu-latest
     needs:
       - Init
+    container: mwierzchowski/weather-store-builder:latest
     steps:
       - name: Dummy
         run: echo Hello world
