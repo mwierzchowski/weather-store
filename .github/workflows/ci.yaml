@@ -48,10 +48,11 @@ jobs:
           context: .
           target: quality-check
           push: false
-          tags: mwierzchowski/weather-store/quality-check:latest
+          tags: quality-check:latest
           cache-from: type=gha,scope=${{ github.WORKFLOW }}
           cache-to: type=gha,scope=${{ github.WORKFLOW }}
 
       - name: Check quality
-        uses: docker://mwierzchowski/weather-store/quality-check:latest
+        run: |
+          docker run -it --rm quality-check:latest
 
