@@ -19,8 +19,15 @@ jobs:
 
       - name: Check quality
         run: |
-          docker build --target quality-check -t quality-checker:latest .
-          docker run --rm quality-checker:latest
+          docker build --target quality-checker -t quality-checker:job .
+          docker run --rm quality-checker:job
+
+# test init
+# logowanie
+# cachowanie m2
+# cachowanie warstw
+# wyciaganie plikow
+
 
 #  Build:
 #    runs-on: ubuntu-latest

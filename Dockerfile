@@ -7,7 +7,7 @@ COPY pom.xml pom.xml
 COPY src src
 COPY .git .git
 
-FROM builder AS quality-check
+FROM builder AS quality-checker
 CMD mvn verify surefire-report:report-only --no-transfer-progress
 
 FROM builder AS uber-jar
