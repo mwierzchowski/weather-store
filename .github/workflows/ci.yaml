@@ -1,9 +1,6 @@
 name: CI
 on: push
 
-env:
-  DOCKER_BUILDKIT: 1
-
 jobs:
   Build:
     runs-on: ubuntu-latest
