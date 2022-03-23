@@ -5,14 +5,6 @@ jobs:
   Build:
     runs-on: ubuntu-latest
     steps:
-      - name: Debug
-        run: |
-          echo $GITHUB_ACTOR
-          echo $GITHUB_REPOSITORY
-          echo $GITHUB_REPOSITORY_OWNER
-          echo $GITHUB_WORKFLOW
-          echo $GITHUB_WORKSPACE
-
       - name: Checkout
         uses: actions/checkout@v3
 
@@ -22,7 +14,7 @@ jobs:
       - name: Login to Docker Hub
         uses: docker/login-action@v1
         with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          username: ${{ github.REPOSITORY_OWNER }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
       - name: Build image
@@ -30,6 +22,6 @@ jobs:
         with:
           context: .
           push: false
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/weather-store:latest
-          cache-from: type=gha,scope=${{ github.workflow }}
-          cache-to: type=gha,scope=${{ github.workflow }}
+          tags: ${{ github.REPOSITORY }}:latest
+          cache-from: type=gha,scope=${{ github.WORKFLOW }}
+          cache-to: type=gha,scope=${{ github.WORKFLOW }}
