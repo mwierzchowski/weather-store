@@ -1,16 +1,16 @@
 ARG BUILD_HOME=/usr/build
 
-FROM maven:3.8.4-eclipse-temurin-17-alpine AS builder
+FROM maven:3.8.4-eclipse-temurin-17-alpine AS maven-builder
 ARG BUILD_HOME
 WORKDIR ${BUILD_HOME}
 COPY pom.xml pom.xml
 COPY src src
 COPY .git .git
 
-FROM builder AS quality-checker
+FROM maven-builder AS quality-checker
 CMD mvn verify surefire-report:report-only --no-transfer-progress
 
-FROM builder AS uber-jar
+FROM maven-builder AS uber-jar
 RUN --mount=type=cache,target=/root/.m2 \
     mvn package -DskipTests --no-transfer-progress
 
