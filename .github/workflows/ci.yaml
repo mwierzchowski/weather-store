@@ -2,7 +2,7 @@ name: CI
 on: push
 
 env:
-  test: asdf
+  test: ccc
 
 jobs:
   Build:
