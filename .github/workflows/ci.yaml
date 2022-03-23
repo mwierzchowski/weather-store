@@ -26,5 +26,7 @@ jobs:
           context: .
           push: false
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/weather-store:latest
-          cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/weather-store:buildcache
-          cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/weather-store:buildcache,mode=max
+          cache-from: type=gha, scope=${{ github.workflow }}
+          cache-to: type=gha, scope=${{ github.workflow }}
+#          cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/weather-store:buildcache
+#          cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/weather-store:buildcache,mode=max
