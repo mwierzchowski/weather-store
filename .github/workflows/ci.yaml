@@ -21,6 +21,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
+          target: build
           push: false
           tags: ${{ github.REPOSITORY }}:preview
           cache-from: type=gha,scope=${{ github.WORKFLOW }}
@@ -45,8 +46,8 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          target: checks
+          target: quality-check
           push: false
-          tags: ${{ github.REPOSITORY }}:checks
+          tags: ${{ github.REPOSITORY }}-check:${{ github.RUN_ATTEMPT }}
           cache-from: type=gha,scope=${{ github.WORKFLOW }}
           cache-to: type=gha,scope=${{ github.WORKFLOW }}
