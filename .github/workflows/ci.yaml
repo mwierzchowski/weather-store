@@ -14,15 +14,16 @@ jobs:
       - name: Login to Docker Hub
         uses: docker/login-action@v1
         with:
-          username: ${{ github.REPOSITORY_OWNER }}
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build image
         uses: docker/build-push-action@v2
         with:
           context: .
           target: maven-builder
-          push: false
+          push: true
           tags: ${{ github.REPOSITORY }}-builder:latest
           cache-from: type=gha,scope=${{ github.WORKFLOW }}
           cache-to: type=gha,scope=${{ github.WORKFLOW }}
