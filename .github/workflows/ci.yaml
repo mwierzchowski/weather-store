@@ -42,17 +42,18 @@ jobs:
           username: ${{ github.REPOSITORY_OWNER }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
-      - name: Build checker
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          target: quality-check
-          push: false
-          tags: quality-check:latest
-          cache-from: type=gha,scope=${{ github.WORKFLOW }}
-          cache-to: type=gha,scope=${{ github.WORKFLOW }}
+#      - name: Build checker
+#        uses: docker/build-push-action@v2
+#        with:
+#          context: .
+#          target: quality-check
+#          push: false
+#          tags: quality-check:latest
+#          cache-from: type=gha,scope=${{ github.WORKFLOW }}
+#          cache-to: type=gha,scope=${{ github.WORKFLOW }}
 
       - name: Check quality
         run: |
-          docker run --rm quality-check:latest
+          docker build --target quality-check -t quality-checker:latest .
+          docker run --rm quality-checker:latest
 
