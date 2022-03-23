@@ -2,26 +2,26 @@ name: CI
 on: push
 
 jobs:
-  Check:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Set up Java
-        uses: actions/setup-java@v2
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-          cache: 'maven'
-
-      - name: Set up Maven
-        uses: stCarolas/setup-maven@v4.3
-        with:
-          maven-version: 3.8.4
-
-      - name: Check quality native
-        run: mvn verify surefire-report:report-only --no-transfer-progress
+#  Check:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v3
+#
+#      - name: Set up Java
+#        uses: actions/setup-java@v2
+#        with:
+#          distribution: 'temurin'
+#          java-version: '17'
+#          cache: 'maven'
+#
+#      - name: Set up Maven
+#        uses: stCarolas/setup-maven@v4.3
+#        with:
+#          maven-version: 3.8.4
+#
+#      - name: Check quality
+#        run: mvn verify surefire-report:report-only --no-transfer-progress
 
 
 #  Check:
@@ -48,6 +48,45 @@ jobs:
 # cachowanie warstw
 # wyciaganie plikow
 
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'maven'
+
+      - name: Set up Maven
+        uses: stCarolas/setup-maven@v4.3
+        with:
+          maven-version: 3.8.4
+
+      - name: Build JAR
+        run: mvn package -DskipTests --no-transfer-progress
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ github.REPOSITORY_OWNER }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+      - name: Build image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          target: build-native
+          push: false
+          tags: ${{ github.REPOSITORY }}:preview
+          cache-from: type=gha,scope=${{ github.WORKFLOW }}
+          cache-to: type=gha,scope=${{ github.WORKFLOW }}
 
 #  Build:
 #    runs-on: ubuntu-latest
