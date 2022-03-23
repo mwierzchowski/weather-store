@@ -48,10 +48,10 @@ jobs:
           context: .
           target: quality-check
           push: false
-          tags: quality-check:latest
+          tags: mwierzchowski/quality-check:latest
           cache-from: type=gha,scope=${{ github.WORKFLOW }}
           cache-to: type=gha,scope=${{ github.WORKFLOW }}
 
       - name: Check quality
-        uses: quality-check:latest
+        uses: mwierzchowski/quality-check:latest
 
