@@ -1,6 +1,9 @@
 name: CI
 on: push
 
+env:
+  test: 123
+
 jobs:
   Build:
     runs-on: ubuntu-latest
