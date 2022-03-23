@@ -78,7 +78,7 @@ jobs:
           username: ${{ github.REPOSITORY_OWNER }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
-      - name: Build image
+      - name: Build image 2
         uses: docker/build-push-action@v2
         with:
           context: .
