@@ -18,4 +18,4 @@ WORKDIR /usr/app
 RUN addgroup -S java && adduser -S java -G java
 COPY --from=uber-jar ${BUILD_HOME}/target/*.jar app.jar
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","app.jar"]
+ENTRYPOINT java -jar app.jar
