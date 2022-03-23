@@ -2,7 +2,7 @@ name: CI
 on: push
 
 env:
-  test: ccc
+  test: ddd
 
 jobs:
   Build:
@@ -27,4 +27,4 @@ jobs:
           push: false
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/weather-store:latest
           cache-from: type=gha,scope=${{ github.workflow }}
-          cache-to: type=gha,mode=max,scope=${{ github.workflow }}
+          cache-to: type=gha,scope=${{ github.workflow }}
