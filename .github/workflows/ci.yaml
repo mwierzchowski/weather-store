@@ -2,7 +2,7 @@ name: CI
 on: push
 
 env:
-  test: qqq
+  test: ttttt
 
 jobs:
   Build:
