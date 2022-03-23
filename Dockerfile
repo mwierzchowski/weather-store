@@ -6,7 +6,7 @@ COPY pom.xml pom.xml
 COPY src src
 COPY .git .git
 
-FROM maven-base AS validation
+FROM maven-base AS checks
 RUN --mount=type=cache,target=/root/.m2 \
     mvn verify surefire-report:report-only --no-transfer-progress
 
