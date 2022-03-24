@@ -64,7 +64,7 @@ jobs:
         image: redis
     steps:
       - name: Debug
-        run: echo Will verify ${{ PREVIEW_TAG }}
+        run: echo Will verify ${{ env.PREVIEW_TAG }}
 
   Clean:
     runs-on: ubuntu-latest
