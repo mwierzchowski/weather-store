@@ -2,26 +2,6 @@ name: CI
 on: push
 
 jobs:
-  Check:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set up build
-        uses: s4u/setup-maven-action@v1.3.1
-        with:
-          java-version: '17'
-          java-distribution: 'temurin'
-          maven-version: 3.8.4
-
-      - name: Check quality
-        run: mvn verify surefire-report:report-only --no-transfer-progress
-
-      - name: Export tests report
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: Tests report
-          path: ${{ github.WORKSPACE }}/target/site/surefire-report.html
-
   Build:
     runs-on: ubuntu-latest
     steps:
@@ -46,3 +26,22 @@ jobs:
           cache-from: type=gha,scope=${{ github.WORKFLOW }}
           cache-to: type=gha,scope=${{ github.WORKFLOW }}
 
+  Check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up build
+        uses: s4u/setup-maven-action@v1.3.1
+        with:
+          java-version: '17'
+          java-distribution: 'temurin'
+          maven-version: 3.8.4
+
+      - name: Check quality
+        run: mvn verify surefire-report:report-only --no-transfer-progress
+
+      - name: Export test report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: Test report
+          path: ${{ github.WORKSPACE }}/target/site/surefire-report.html
