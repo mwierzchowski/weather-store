@@ -1,7 +1,7 @@
 name: CI
 on: push
 env:
-  PREVIEW_TAG: ${{ github.REPOSITORY }}:preview-$${{ github.RUN_ATTEMPT }}
+  BUILD_TAG: ${{ github.REPOSITORY }}:build-${{ github.RUN_ATTEMPT }}
 
 jobs:
   Test:
@@ -44,7 +44,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ env.PREVIEW_TAG }}
+          tags: ${{ env.BUILD_TAG }}
           cache-from: type=gha,scope=${{ github.WORKFLOW }}
           cache-to: type=gha,scope=${{ github.WORKFLOW }}
 
@@ -64,7 +64,7 @@ jobs:
         image: redis
     steps:
       - name: Debug
-        run: echo Will verify ${{ env.PREVIEW_TAG }}
+        run: echo Will verify ${{ env.BUILD_TAG }}
 
   Clean:
     runs-on: ubuntu-latest
