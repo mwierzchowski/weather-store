@@ -13,14 +13,14 @@ jobs:
           maven-version: 3.8.4
 
       - name: Check quality
-        run: mvn verify surefire-report:report-only
+        run: mvn verify surefire-report:report-only --no-transfer-progress
 
-      - name: Publish test results
+      - name: Export tests report
         if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: Test results
-          path: ~/work/weather-store/weather-store/target/site/surefire-report.html
+          name: Tests report
+          path: ${{ github.WORKSPACE }}/target/site/surefire-report.html
 
   Build:
     runs-on: ubuntu-latest
