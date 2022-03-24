@@ -1,7 +1,7 @@
 name: CI
 on: push
 env:
-  BUILD_TAG: ${{ github.REPOSITORY }}:build-${{ github.RUN_ATTEMPT }}
+  BUILD_TAG: ghcr.io/${{ github.REPOSITORY }}:build-${{ github.RUN_NUMBER }}
 
 jobs:
   Test:
