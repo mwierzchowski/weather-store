@@ -2,44 +2,24 @@ name: CI
 on: push
 
 jobs:
-
-  Check1:
+  Check:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+#      - name: Checkout
+#        uses: actions/checkout@v3
+#
+#      - name: Set up Java
+#        uses: actions/setup-java@v2
+#        with:
+#          distribution: 'temurin'
+#          java-version: '17'
+#          cache: 'maven'
 
-      - name: Set up cache
-        uses: actions/cache@v3
-        with:
-          path: /home/runner/work/weather-store/weather-store/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
-
-      - name: Check quality
-        uses: docker://maven:3.8.4-eclipse-temurin-17
-        env:
-          MAVEN_CONFIG: /github/workspace/.m2
-        with:
-          args: mvn verify surefire-report:report-only
-
-  Check2:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Set up Java
-        uses: actions/setup-java@v2
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-          cache: 'maven'
-
-      - name: Set up Maven
+      - name: Set up builder
         uses: stCarolas/setup-maven@v4.3
         with:
+          java-version: '17'
+          java-distribution: 'temurin'
           maven-version: 3.8.4
 
       - name: Check quality
