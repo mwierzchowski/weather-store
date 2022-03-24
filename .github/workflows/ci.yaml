@@ -78,7 +78,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run container
-        run: docker run -p 8080:8080 --rm ${{ env.BUILD_TAG }}
+        run: docker run -d -p 8080:8080 ${{ env.BUILD_TAG }}
 
 #      - name: Check actuator
 #        uses: http://localhost:8080/actuator/health
