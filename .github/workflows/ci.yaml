@@ -13,7 +13,6 @@ jobs:
           java-version: '17'
           java-distribution: 'temurin'
           maven-version: 3.8.4
-
       - name: Check quality
         run: mvn verify surefire-report:report-only --no-transfer-progress
 
@@ -85,7 +84,7 @@ jobs:
         with:
           url: 'http://localhost:8080/actuator/health'
           responseCode: 200
-          timeout: 2000
+          timeout: 20000
           interval: 500
 
   Clean:
@@ -103,5 +102,5 @@ jobs:
 
       - name: Delete image
         continue-on-error: true
-        run: docker image rm -f ${{ env.BUILD_TAG }}
+        run: docker rmi -f ${{ env.BUILD_TAG }}
 
