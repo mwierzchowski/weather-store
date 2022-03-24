@@ -70,7 +70,7 @@ jobs:
       redis:
         image: redis
     steps:
-      - name: Start ${{ env.BUILD_TAG }}
+      - name: Run container
         run: docker run --rm ${{ env.BUILD_TAG }}
 
   Clean:
