@@ -19,12 +19,14 @@ jobs:
       - name: Build JAR
         uses: docker://maven:3.8.4-eclipse-temurin-17
         with:
-          args: -v "$HOME/.m2":/root/.m2 mvn package -DskipTests
+          args: mvn package -DskipTests
 
       - name: Debug
         run: |
+          pwd
           ls -al
           ls -al target
+
 
 
 #      - name: Set up Docker Buildx
