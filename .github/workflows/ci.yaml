@@ -16,7 +16,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      - name: Build JAR 3
+      - name: Build JAR 4
         uses: docker://maven:3.8.4-eclipse-temurin-17
         env:
           MAVEN_CONFIG: /github/workspace/.m2
