@@ -2,6 +2,19 @@ name: CI
 on: push
 
 jobs:
+  Check2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up build
+        uses: s4u/setup-maven-action@v1.3.1
+        with:
+          java-version: '17'
+          java-distribution: 'temurin'
+          maven-version: 3.8.4
+
+      - name: Check quality
+        run: mvn verify surefire-report:report-only
+
   Check1:
     runs-on: ubuntu-latest
     steps:
@@ -18,19 +31,6 @@ jobs:
       - name: Set up Maven
         uses: stCarolas/setup-maven@v4.3
         with:
-          maven-version: 3.8.4
-
-      - name: Check quality
-        run: mvn verify surefire-report:report-only
-
-  Check2:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set up build
-        uses: s4u/setup-maven-action@v1.3.1
-        with:
-          java-version: '17'
-          java-distribution: 'temurin'
           maven-version: 3.8.4
 
       - name: Check quality
