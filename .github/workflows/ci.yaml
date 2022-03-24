@@ -21,7 +21,7 @@ jobs:
 #          maven-version: 3.8.4
 
       - name: Set up build
-        uses: s4u/setup-maven-action@v1
+        uses: s4u/setup-maven-action@v1.3.1
         with:
           java-version: '17'
           java-distribution: 'temurin'
