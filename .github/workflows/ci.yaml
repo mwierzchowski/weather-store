@@ -19,7 +19,7 @@ jobs:
       - name: Build JAR
         uses: docker://maven:3.8.4-eclipse-temurin-17
         with:
-          args: mvn package -DskipTests --no-transfer-progress
+          args: mvn package -DskipTests
 
       - name: Debug
         run: |
