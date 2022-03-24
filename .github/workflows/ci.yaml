@@ -9,6 +9,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Sanity checks
+        run: |
+          pwd
+          ls -al
+
       - name: Build JAR
         run: mvn package -DskipTests --no-transfer-progress
 
