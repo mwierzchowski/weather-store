@@ -30,6 +30,7 @@ jobs:
       - name: Check quality
         run: mvn verify surefire-report:report-only
 
+
   Build:
     runs-on: ubuntu-latest
     steps:
