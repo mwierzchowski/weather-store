@@ -2,7 +2,28 @@ name: CI
 on: push
 
 jobs:
-  Check:
+  Check1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up cache
+        uses: actions/cache@v3
+        with:
+          path: /home/runner/work/weather-store/weather-store/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Check quality
+        uses: docker://maven:3.8.4-eclipse-temurin-17
+        env:
+          MAVEN_CONFIG: /github/workspace/.m2
+        with:
+          args: mvn verify surefire-report:report-only
+
+  Check2:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -38,7 +59,7 @@ jobs:
           username: ${{ github.REPOSITORY_OWNER }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
-      - name: Build image 2
+      - name: Build image
         uses: docker/build-push-action@v2
         with:
           context: .
