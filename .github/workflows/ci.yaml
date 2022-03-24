@@ -19,7 +19,7 @@ jobs:
       - name: Build JAR
         uses: docker://maven:3.8.4-eclipse-temurin-17
         with:
-          entrypoint: mvn package -DskipTests --no-transfer-progress
+          args: mvn package -DskipTests --no-transfer-progress
 
 
 #      - name: Set up Docker Buildx
