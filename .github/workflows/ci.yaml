@@ -15,8 +15,13 @@ jobs:
 #          java-version: '17'
 #          cache: 'maven'
 
-      - name: Set up builder
-        uses: stCarolas/setup-maven@v4.3
+#      - name: Set up Maven
+#        uses: stCarolas/setup-maven@v4.3
+#        with:
+#          maven-version: 3.8.4
+
+      - name: Set up build
+        uses: s4u/setup-maven-action@v1
         with:
           java-version: '17'
           java-distribution: 'temurin'
