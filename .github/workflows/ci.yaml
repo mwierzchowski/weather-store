@@ -89,6 +89,8 @@ jobs:
 
   Clean:
     runs-on: ubuntu-latest
+    permissions:
+      packages: delete
 #    if: always()
 #    needs:
 #      - Verify
