@@ -12,6 +12,7 @@ jobs:
       - name: Build JAR
         run: mvn package -DskipTests --no-transfer-progress
 
+
 #  Check:
 #    runs-on: ubuntu-latest
 #    steps:
