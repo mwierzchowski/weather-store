@@ -2,49 +2,6 @@ name: CI
 on: push
 
 jobs:
-#  Integrated-Build:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v3
-#
-#      - name: Set up cache
-#        uses: actions/cache@v3
-#        with:
-#          path: /home/runner/work/weather-store/weather-store/.m2/repository
-#          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-#          restore-keys: |
-#            ${{ runner.os }}-maven-
-#
-#      - name: Build JAR 4
-#        uses: docker://maven:3.8.4-eclipse-temurin-17
-#        env:
-#          MAVEN_CONFIG: /github/workspace/.m2
-#        with:
-#          args: mvn package -DskipTests
-
-
-
-
-#      - name: Set up Docker Buildx
-#        uses: docker/setup-buildx-action@v1
-#
-#      - name: Login to Docker Hub
-#        uses: docker/login-action@v1
-#        with:
-#          username: ${{ github.REPOSITORY_OWNER }}
-#          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-#
-#      - name: Build image
-#        uses: docker/build-push-action@v2
-#        with:
-#          context: .
-#          target: build-native
-#          push: false
-#          tags: ${{ github.REPOSITORY }}:preview
-#          cache-from: type=gha,scope=${{ github.WORKFLOW }}
-#          cache-to: type=gha,scope=${{ github.WORKFLOW }}
-
   Check:
     runs-on: ubuntu-latest
     steps:
@@ -66,93 +23,27 @@ jobs:
       - name: Check quality
         run: mvn verify surefire-report:report-only
 
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
 
-#  Check:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v3
-#
-#      - name: Set up Docker Buildx
-#        uses: docker/setup-buildx-action@v1
-#
-#      - name: Login to Docker Hub
-#        uses: docker/login-action@v1
-#        with:
-#          username: ${{ github.REPOSITORY_OWNER }}
-#          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-#
-#      - name: Check quality
-#        run: |
-#          docker build --target quality-checker -t quality-checker:job .
-#          docker run --rm quality-checker:job
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
 
-# cachowanie m2
-# cachowanie warstw
-# wyciaganie plikow
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ github.REPOSITORY_OWNER }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
-#  Build:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v3
-#
-#      - name: Set up Java
-#        uses: actions/setup-java@v2
-#        with:
-#          distribution: 'temurin'
-#          java-version: '17'
-#          cache: 'maven'
-#
-#      - name: Set up Maven
-#        uses: stCarolas/setup-maven@v4.3
-#        with:
-#          maven-version: 3.8.4
-#
-#      - name: Build JAR
-#        run: mvn package -DskipTests --no-transfer-progress
-#
-#      - name: Set up Docker Buildx
-#        uses: docker/setup-buildx-action@v1
-#
-#      - name: Login to Docker Hub
-#        uses: docker/login-action@v1
-#        with:
-#          username: ${{ github.REPOSITORY_OWNER }}
-#          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-#
-#      - name: Build image 7
-#        uses: docker/build-push-action@v2
-#        with:
-#          context: .
-#          target: build-native
-#          push: false
-#          tags: ${{ github.REPOSITORY }}:preview
-#          cache-from: type=gha,scope=${{ github.WORKFLOW }}
-#          cache-to: type=gha,scope=${{ github.WORKFLOW }}
-
-#  Build:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v3
-#
-#      - name: Set up Docker Buildx
-#        uses: docker/setup-buildx-action@v1
-#
-#      - name: Login to Docker Hub
-#        uses: docker/login-action@v1
-#        with:
-#          username: ${{ github.REPOSITORY_OWNER }}
-#          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-#
-#      - name: Build image 2
-#        uses: docker/build-push-action@v2
-#        with:
-#          context: .
-#          target: build
-#          push: false
-#          tags: ${{ github.REPOSITORY }}:preview
-#          cache-from: type=gha,scope=${{ github.WORKFLOW }}
-#          cache-to: type=gha,scope=${{ github.WORKFLOW }}
+      - name: Build image 2
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: false
+          tags: ${{ github.REPOSITORY }}:preview
+          cache-from: type=gha,scope=${{ github.WORKFLOW }}
+          cache-to: type=gha,scope=${{ github.WORKFLOW }}
 
