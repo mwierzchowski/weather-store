@@ -25,7 +25,6 @@ jobs:
         run: |
           ls -al
           ls -al target
-          ls -al ~/.m2/
 
 
 #      - name: Set up Docker Buildx
