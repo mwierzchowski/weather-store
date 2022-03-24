@@ -1,5 +1,7 @@
 name: CI
 on: push
+env:
+  PREVIEW_TAG: ${{ github.REPOSITORY }}:preview-$${{ github.RUN_ATTEMPT }}
 
 jobs:
   Test:
@@ -41,8 +43,8 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          push: false
-          tags: ${{ github.REPOSITORY }}:preview
+          push: true
+          tags: ${{ PREVIEW_TAG }}
           cache-from: type=gha,scope=${{ github.WORKFLOW }}
           cache-to: type=gha,scope=${{ github.WORKFLOW }}
 
@@ -62,16 +64,13 @@ jobs:
         image: redis
     steps:
       - name: Debug
-        run: echo Helo world from Verify
-
-      - name: Fail
-        run: exit 1
+        run: echo Will verify ${{ PREVIEW_TAG }}
 
   Clean:
     runs-on: ubuntu-latest
+    if: always()
     needs:
       - Verify
-#    if: always()
     steps:
       - name: Debug
         run: echo Helo world from Clean
