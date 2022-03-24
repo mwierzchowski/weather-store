@@ -73,8 +73,8 @@ jobs:
       - name: Run container
         run: docker run -p 8080:8080 --rm ${{ env.BUILD_TAG }}
 
-      - name: Check actuator
-        uses: http://localhost:8080/actuator/health
+#      - name: Check actuator
+#        uses: http://localhost:8080/actuator/health
 
   Clean:
     runs-on: ubuntu-latest
