@@ -70,8 +70,8 @@ jobs:
       redis:
         image: redis
     steps:
-      - name: Debug
-        run: echo Will verify ${{ env.BUILD_TAG }}
+      - name: Start ${{ env.BUILD_TAG }}
+        run: docker run --rm ${{ env.BUILD_TAG }}
 
   Clean:
     runs-on: ubuntu-latest
