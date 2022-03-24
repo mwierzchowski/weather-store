@@ -28,7 +28,7 @@ jobs:
           pwd
           ls -al
           ls -al target
-          ls -al ./m2
+          ls -al .m2
 
 
 
