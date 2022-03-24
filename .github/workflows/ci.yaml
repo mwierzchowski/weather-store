@@ -8,13 +8,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Set up cache
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
+#      - name: Set up cache
+#        uses: actions/cache@v3
+#        with:
+#          path: ~/.m2/repository
+#          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+#          restore-keys: |
+#            ${{ runner.os }}-maven-
 
       - name: Build JAR
         uses: docker://maven:3.8.4-eclipse-temurin-17
