@@ -62,5 +62,14 @@ jobs:
         image: redis
     steps:
       - name: Debug
-        run: echo Helo world
+        run: echo Helo world from Verify
+
+  Clean:
+    runs-on: ubuntu-latest
+    needs:
+      - Verify
+    if: always()
+    steps:
+      - name: Debug
+        run: echo Helo world from Clean
 
