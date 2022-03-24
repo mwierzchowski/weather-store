@@ -64,6 +64,9 @@ jobs:
       - name: Debug
         run: echo Helo world from Verify
 
+      - name: Fail
+        run: exit 1
+
   Clean:
     runs-on: ubuntu-latest
     needs:
