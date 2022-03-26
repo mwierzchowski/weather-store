@@ -13,15 +13,24 @@ jobs:
           java-version: '17'
           java-distribution: 'temurin'
           maven-version: 3.8.4
+
       - name: Check quality
-        run: mvn verify surefire-report:report-only --no-transfer-progress
+        run: mvn jacoco:prepare-agent verify surefire-report:report-only jacoco:report
 
       - name: Export test report
-        if: always()
         uses: actions/upload-artifact@v3
+        if: always()
         with:
           name: Test report
           path: ${{ github.WORKSPACE }}/target/site/surefire-report.html
+
+      - name: Export coverage report
+        uses: paambaati/codeclimate-action@v3.0.0
+        if: always()
+        env:
+          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+        with:
+          coverageLocations: ${{github.workspace}}/target/site/jacoco/jacoco.xml:jacoco
 
   Build:
     runs-on: ubuntu-latest
