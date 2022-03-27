@@ -19,10 +19,10 @@ jobs:
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
           JACOCO_SOURCE_PATH: ${{ github.WORKSPACE }}/src/main/java
-          PREFIX: ${{ github.WORKSPACE }}
         with:
           coverageCommand: mvn jacoco:prepare-agent verify surefire-report:report-only jacoco:report
           coverageLocations: ${{ github.WORKSPACE }}/target/site/jacoco/jacoco.xml:jacoco
+          args: --prefix ${{ github.WORKSPACE }}
 
 #      - name: Run test
 #        run: mvn jacoco:prepare-agent verify surefire-report:report-only
