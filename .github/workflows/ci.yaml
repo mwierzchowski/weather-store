@@ -27,7 +27,6 @@ jobs:
       - name: Export coverage report
         uses: paambaati/codeclimate-action@v3.0.0
         if: always()
-        continue-on-error: true
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
           JACOCO_SOURCE_PATH: ${{ github.WORKSPACE }}/src/main/java
