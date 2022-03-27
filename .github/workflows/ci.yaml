@@ -17,16 +17,15 @@ jobs:
       - name: Check quality
         run: mvn jacoco:prepare-agent verify surefire-report:report-only jacoco:report
 
-      - name: Export test report
+      - name: Publish test report
         uses: actions/upload-artifact@v3
         if: always()
         with:
           name: Test report
           path: ${{ github.WORKSPACE }}/target/site/surefire-report.html
 
-      - name: Export coverage report
+      - name: Export test coverage to Code Climate
         uses: paambaati/codeclimate-action@v3.0.0
-        if: always()
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
           JACOCO_SOURCE_PATH: ${{ github.WORKSPACE }}/src/main/java
