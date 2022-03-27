@@ -1,11 +1,11 @@
 package com.github.mwierzchowski.weather.store.core;
 
+import java.math.BigDecimal;
+import java.util.stream.Stream;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
-
-import java.math.BigDecimal;
-import java.util.stream.Stream;
 
 /**
  * Represents speed value in given units (see {@link Unit}).

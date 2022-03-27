@@ -1,8 +1,8 @@
 package com.github.mwierzchowski.weather.store.core;
 
-import lombok.Data;
-
 import java.math.BigDecimal;
+
+import lombok.Data;
 
 /**
  * Represents temperature value in given units (see {@link Unit}).

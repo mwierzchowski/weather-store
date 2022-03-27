@@ -1,8 +1,8 @@
 package com.github.mwierzchowski.weather.store.core;
 
-import lombok.Data;
-
 import java.time.Instant;
+
+import lombok.Data;
 
 /**
  * Represents weather conditions.

@@ -1,14 +1,15 @@
 package com.github.mwierzchowski.weather.store.api;
 
-import com.github.mwierzchowski.weather.store.core.Temperature;
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
+import java.util.Date;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
-import java.util.Date;
+
+import com.github.mwierzchowski.weather.store.core.Temperature;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 
 @Data
 @Schema(description = "Weather conditions data transfer object")
