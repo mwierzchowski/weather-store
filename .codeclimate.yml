@@ -7,3 +7,6 @@ plugins:
     enabled: true
   sonar-java:
     enabled: true
+  shellcheck:
+    enabled: true
+
