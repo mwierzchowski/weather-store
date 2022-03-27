@@ -18,11 +18,11 @@ jobs:
         uses: paambaati/codeclimate-action@v3.0.0
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-          JACOCO_SOURCE_PATH: ${{ github.WORKSPACE }}/src/main/java
+          JACOCO_SOURCE_PATH: ${{ github.WORKSPACE }}
         with:
           coverageCommand: mvn jacoco:prepare-agent verify surefire-report:report-only jacoco:report
           coverageLocations: ${{ github.WORKSPACE }}/target/site/jacoco/jacoco.xml:jacoco
-          args: --prefix ${{ github.WORKSPACE }}
+#          args: --prefix ${{ github.WORKSPACE }}
 
 #      - name: Run test
 #        run: mvn jacoco:prepare-agent verify surefire-report:report-only
