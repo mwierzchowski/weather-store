@@ -37,9 +37,9 @@ public class WeatherControllerV1 {
     @PostMapping
     @Operation(summary = "Save weather", description = "Saves new weather observation")
     public void store(@Valid @RequestBody WeatherDto weatherDto) {
-        log.debug("Received DTO: {}", weatherDto);
+        LOGGER.debug("Received DTO: {}", weatherDto);
         this.latest = mapper.weatherFrom(weatherDto);
-        log.debug("Converted: {}", latest);
+        LOGGER.debug("Converted: {}", latest);
     }
 
     /**
