@@ -15,7 +15,7 @@ jobs:
           maven-version: 3.8.4
 
       - name: Check quality
-        run: mvn jacoco:prepare-agent verify surefire-report:report-only jacoco:report
+        run: mvn jacoco:prepare-agent verify surefire-report:report-only
 
       - name: Publish test report
         uses: actions/upload-artifact@v3
@@ -28,8 +28,9 @@ jobs:
         uses: paambaati/codeclimate-action@v3.0.0
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-#          JACOCO_SOURCE_PATH: ${{ github.WORKSPACE }}/src/main/java
+          JACOCO_SOURCE_PATH: ${{ github.WORKSPACE }}/src/main/java
         with:
+          coverageCommand: mvn jacoco:report
           coverageLocations: ${{ github.WORKSPACE }}/target/site/jacoco/jacoco.xml:jacoco
 
   Build:
