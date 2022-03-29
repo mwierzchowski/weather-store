@@ -7,6 +7,7 @@ ARG LAYERS_DIR
 WORKDIR ${BUILD_DIR}
 RUN --mount=type=cache,target=/root/.m2 \
     --mount=type=bind,source=pom.xml,target=pom.xml \
+    --mount=type=bind,source=lombok.config,target=lombok.config \
     --mount=type=bind,source=src,target=src \
     --mount=type=bind,source=.git,target=.git \
     mvn package -DskipTests

@@ -14,7 +14,7 @@ jobs:
           java-distribution: 'temurin'
           maven-version: 3.8.4
 
-      - name: Run test
+      - name: Run tests
         run: mvn jacoco:prepare-agent verify surefire-report:report-only jacoco:report
 
       - name: Publish test report
