@@ -3,7 +3,7 @@ version: "2"
 plugins:
   checkstyle:
     enabled: true
-    config: "etc/google_checkstyle.xml"
+#    config: "etc/google_checkstyle.xml"
 #      file: "etc/google_checkstyle.xml"
   pmd:
     enabled: true
