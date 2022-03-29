@@ -20,7 +20,7 @@ public class Temperature {
     private Unit unit;
 
     /**
-     * Units of temperature
+     * Units of temperature.
      */
     public enum Unit {
         C, F, K

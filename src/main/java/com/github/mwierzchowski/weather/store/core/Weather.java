@@ -15,12 +15,12 @@ public class Weather {
     private Instant observed;
 
     /**
-     * Temperature
+     * Temperature.
      */
     private Temperature temperature;
 
     /**
-     * Wind
+     * Wind.
      */
     private Wind wind;
 

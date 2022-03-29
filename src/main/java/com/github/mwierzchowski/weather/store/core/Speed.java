@@ -23,7 +23,7 @@ public class Speed {
     private Unit unit;
 
     /**
-     * Units of speed
+     * Units of speed.
      */
     @AllArgsConstructor
     public enum Unit {
