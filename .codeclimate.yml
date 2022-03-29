@@ -4,7 +4,7 @@ plugins:
   checkstyle:
     enabled: true
     config:
-      file: "etc\google_checkstyle.xml"
+      file: "etc/google_checkstyle.xml"
   pmd:
     enabled: true
   sonar-java:
