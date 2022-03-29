@@ -1,7 +1,6 @@
 package com.github.mwierzchowski.weather.store.core;
 
 import java.math.BigDecimal;
-
 import lombok.Data;
 
 /**

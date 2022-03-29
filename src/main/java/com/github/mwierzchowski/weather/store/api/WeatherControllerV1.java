@@ -1,11 +1,10 @@
 package com.github.mwierzchowski.weather.store.api;
 
-import javax.validation.Valid;
-
 import com.github.mwierzchowski.weather.store.core.Weather;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;

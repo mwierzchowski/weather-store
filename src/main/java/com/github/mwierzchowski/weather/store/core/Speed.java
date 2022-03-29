@@ -2,7 +2,6 @@ package com.github.mwierzchowski.weather.store.core;
 
 import java.math.BigDecimal;
 import java.util.stream.Stream;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
