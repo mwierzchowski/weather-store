@@ -11,3 +11,8 @@ plugins:
   shellcheck:
     enabled: true
 
+exclude_patterns:
+  - .github/
+  - .run/
+  - etc/
+
