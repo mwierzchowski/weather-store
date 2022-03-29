@@ -25,7 +25,7 @@ public class Weather {
     private Wind wind;
 
     /**
-     * Clouds coverage (percentage)
+     * Clouds coverage (percentage).
      */
     private Integer cloudsCoverage;
 }

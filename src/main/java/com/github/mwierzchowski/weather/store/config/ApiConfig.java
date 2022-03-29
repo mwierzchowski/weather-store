@@ -16,7 +16,7 @@ public class ApiConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    OpenAPI openAPI(Environment env) {
+    OpenAPI openApi(Environment env) {
         var appInfo = new Info()
                 .title(env.getProperty("info.app.name"))
                 .description(env.getProperty("info.app.description"));
