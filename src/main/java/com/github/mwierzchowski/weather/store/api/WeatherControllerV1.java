@@ -49,12 +49,14 @@ public class WeatherControllerV1 {
         @Mapping(target = "temperature", source = "temperature.value")
         @Mapping(target = "temperatureUnit", source = "temperature.unit")
         @Mapping(target = "wind", source = "wind.speed.value")
-        @Mapping(target = "windUnit", expression = "java( weather.getWind().getSpeed().getUnit().getSymbol() )")
+        @Mapping(target = "windUnit",
+                expression = "java( weather.getWind().getSpeed().getUnit().getSymbol() )")
         @Mapping(target = "windDirection", source = "wind.direction")
         WeatherDto weatherDtoFrom(Weather weather);
 
         @InheritInverseConfiguration
-        @Mapping(target = "wind.speed.unit", expression = "java( Speed.Unit.from(weatherDto.getWindUnit()) )")
+        @Mapping(target = "wind.speed.unit",
+                expression = "java( Speed.Unit.from(weatherDto.getWindUnit()) )")
         Weather weatherFrom(WeatherDto weatherDto);
     }
 }

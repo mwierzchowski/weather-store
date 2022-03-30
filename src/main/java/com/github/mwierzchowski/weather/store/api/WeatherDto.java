@@ -22,7 +22,8 @@ public class WeatherDto {
     @Schema(description = "Temperature value", example = "7.0")
     private Double temperature;
 
-    @Schema(description = "Temperature unit", implementation = Temperature.Unit.class, example = "C")
+    @Schema(description = "Temperature unit", implementation = Temperature.Unit.class,
+            example = "C")
     private String temperatureUnit;
 
     @Min(0)

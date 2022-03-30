@@ -49,7 +49,9 @@ public class Speed {
             return Stream.of(values())
                     .filter(unit -> unit.symbol.equals(symbol))
                     .findAny()
-                    .orElseThrow(() -> new IllegalArgumentException("Symbol " + symbol + " is not valid"));
+                    .orElseThrow(() ->
+                            new IllegalArgumentException("Symbol " + symbol + " is not valid")
+                    );
         }
     }
 }
