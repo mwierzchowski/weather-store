@@ -100,7 +100,9 @@
         <module name="OverloadMethodsDeclarationOrder"/>
         <module name="VariableDeclarationUsageDistance"/>
         <module name="CustomImportOrder">
+            <property name="customImportOrderRules" value="THIRD_PARTY_PACKAGE###STATIC"/>
             <property name="sortImportsInGroupAlphabetically" value="true"/>
+            <property name="separateLineBetweenGroups" value="true"/>
         </module>
         <module name="MethodParamPad"/>
         <module name="OperatorWrap">
