@@ -1,10 +1,11 @@
 package com.github.mwierzchowski.weather.store.core;
 
-import static com.github.mwierzchowski.weather.store.core.Temperature.Unit.C;
 import java.time.Instant;
+import lombok.Data;
+
+import static com.github.mwierzchowski.weather.store.core.Temperature.Unit.C;
 import static java.time.Instant.now;
 import static java.time.Period.ofDays;
-import lombok.Data;
 
 /**
  * Represents weather conditions.
