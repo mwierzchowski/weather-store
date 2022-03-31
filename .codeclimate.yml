@@ -3,7 +3,7 @@ version: "2"
 plugins:
   checkstyle:
     enabled: true
-    config: etc/codeclimate_checkstyle.xml
+    config: etc/checkstyle.xml
   pmd:
     enabled: true
     config:
