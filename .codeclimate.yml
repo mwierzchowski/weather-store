@@ -6,13 +6,7 @@ plugins:
     config: etc/checkstyle.xml
   pmd:
     enabled: true
-    config:
-      rules:
-        - java-basic
-        - java-empty
-        - java-imports
-        - java-unnecessary
-        - java-unusedcode
+    config: etc/pmd.xml
   sonar-java:
     enabled: true
   shellcheck:
