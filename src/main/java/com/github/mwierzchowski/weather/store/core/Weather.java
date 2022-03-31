@@ -3,10 +3,6 @@ package com.github.mwierzchowski.weather.store.core;
 import java.time.Instant;
 import lombok.Data;
 
-import static com.github.mwierzchowski.weather.store.core.Temperature.Unit.C;
-import static java.time.Instant.now;
-import static java.time.Period.ofDays;
-
 /**
  * Represents weather conditions.
  * @author Marcin Wierzchowski
@@ -32,11 +28,4 @@ public class Weather {
      * Clouds coverage (percentage).
      */
     private Integer cloudsCoverage;
-
-    public static void main(String[] args) {
-
-        var unit = C;
-        now();
-        ofDays(0);
-    }
 }

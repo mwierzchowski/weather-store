@@ -24,20 +24,20 @@ import org.springframework.web.bind.annotation.RestController;
 @ApiResponse(description = "Bad request", responseCode = "400")
 @ApiResponse(description = "Service failure", responseCode = "500")
 public class WeatherControllerV1 {
-    private final WeatherMapper mapper = Mappers.getMapper(WeatherMapper.class);
-    private Weather latest = null;
+    private static final WeatherMapper MAPPER = Mappers.getMapper(WeatherMapper.class);
+    private Weather latest;
 
     @GetMapping("/now")
     @Operation(summary = "Current weather", description = "Provides most current weather")
     public WeatherDto getCurrent() {
-        return mapper.weatherDtoFrom(latest);
+        return MAPPER.weatherDtoFrom(latest);
     }
 
     @PostMapping
     @Operation(summary = "Save weather", description = "Saves new weather observation")
     public void store(@Valid @RequestBody WeatherDto weatherDto) {
         LOGGER.debug("Received DTO: {}", weatherDto);
-        this.latest = mapper.weatherFrom(weatherDto);
+        this.latest = MAPPER.weatherFrom(weatherDto);
         LOGGER.debug("Converted: {}", latest);
     }
 
