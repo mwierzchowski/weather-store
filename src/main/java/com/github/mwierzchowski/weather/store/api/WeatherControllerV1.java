@@ -24,8 +24,8 @@ import org.springframework.web.bind.annotation.RestController;
 @ApiResponse(description = "Bad request", responseCode = "400")
 @ApiResponse(description = "Service failure", responseCode = "500")
 public class WeatherControllerV1 {
-    private final WeatherMapper mapper = Mappers.getMapper(WeatherMapper.class);
-    private Weather latest = null;
+    private final static WeatherMapper mapper = Mappers.getMapper(WeatherMapper.class);
+    private Weather latest;
 
     @GetMapping("/now")
     @Operation(summary = "Current weather", description = "Provides most current weather")

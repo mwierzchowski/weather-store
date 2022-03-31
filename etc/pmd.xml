@@ -10,9 +10,22 @@
 
     <rule ref="category/java/bestpractices.xml"/>
 
-    <rule ref="category/java/codestyle.xml"/>
+    <rule ref="category/java/codestyle.xml">
+        <exclude name="TooManyStaticImports"/>
+        <exclude name="ShortVariable"/>
+        <exclude name="ShortClassName"/>
+        <exclude name="ShortMethodName"/>
+        <exclude name="AtLeastOneConstructor"/>
+        <exclude name="LocalVariableCouldBeFinal"/>
+        <exclude name="LongVariable"/>
+        <exclude name="CallSuperInConstructor"/>
+        <exclude name="OnlyOneReturn"/>
+        <exclude name="CommentDefaultAccessModifier"/>
+    </rule>
 
-    <rule ref="category/java/design.xml"/>
+    <rule ref="category/java/design.xml">
+        <exclude name="LawOfDemeter"/>
+    </rule>
 
     <rule ref="category/java/errorprone.xml"/>
 
@@ -21,5 +34,5 @@
     <rule ref="category/java/performance.xml"/>
 
     <rule ref="category/java/security.xml" />
-    
+
 </ruleset>

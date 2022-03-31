@@ -11,12 +11,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class ApiConfig implements WebMvcConfigurer {
     @Override
-    public void addCorsMappings(CorsRegistry registry) {
+    public void addCorsMappings(final CorsRegistry registry) {
         registry.addMapping("/**");
     }
 
     @Bean
-    OpenAPI openApi(Environment env) {
+    OpenAPI openApi(final Environment env) {
         var appInfo = new Info()
                 .title(env.getProperty("info.app.name"))
                 .description(env.getProperty("info.app.description"));
