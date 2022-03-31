@@ -5,13 +5,13 @@ FROM maven:3.8.4-eclipse-temurin-17-alpine AS maven-builder
 ARG BUILD_DIR
 ARG LAYERS_DIR
 WORKDIR ${BUILD_DIR}
-RUN --mount=type=cache,target=/root/.m2 \
-    --mount=type=bind,source=pom.xml,target=pom.xml \
-    --mount=type=bind,source=lombok.config,target=lombok.config \
-    --mount=type=bind,source=src,target=src \
-    --mount=type=bind,source=.git,target=.git \
-    mvn package -DskipTests
 RUN mkdir -p ${LAYERS_DIR}
+ADD lombok.config .
+ADD pom.xml .
+ADD src src
+ADD .git .git
+RUN --mount=type=cache,target=/root/.m2 \
+    mvn package -DskipTests
 RUN java -Djarmode=layertools -jar target/*.jar extract --destination ${LAYERS_DIR}
 
 FROM eclipse-temurin:17.0.2_8-jre-alpine
