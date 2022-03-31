@@ -21,7 +21,5 @@
     <rule ref="category/java/performance.xml"/>
 
     <rule ref="category/java/security.xml" />
-
-    <rule ref="category/java/usejavaclock.xml" />
-
+    
 </ruleset>
