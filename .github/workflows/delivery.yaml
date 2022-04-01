@@ -1,8 +1,8 @@
 name: Delivery
-on: push
-#  workflow_run:
-#    workflows: [Integration]
-#    types: [completed]
+on:
+  workflow_run:
+    workflows: [Integration]
+    types: [completed]
 
 jobs:
   release:
