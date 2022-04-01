@@ -1,5 +1,5 @@
 # weather-store
-[![CI](https://github.com/mwierzchowski/weather-store/actions/workflows/ci.yaml/badge.svg)](https://github.com/mwierzchowski/weather-store/actions/workflows/ci.yaml)
+[![Integration](https://github.com/mwierzchowski/weather-store/actions/workflows/integration.yaml/badge.svg)](https://github.com/mwierzchowski/weather-store/actions/workflows/integration.yaml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/b10f065419566a429d1c/maintainability)](https://codeclimate.com/github/mwierzchowski/weather-store/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/b10f065419566a429d1c/test_coverage)](https://codeclimate.com/github/mwierzchowski/weather-store/test_coverage)
 
