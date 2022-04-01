@@ -1,7 +1,7 @@
 name: Integration
 on: push
 env:
-  BUILD_TAG: ghcr.io/${{ github.REPOSITORY }}:build-${{ github.RUN_NUMBER }}
+  BUILD_TAG: ghcr.io/${{ github.REPOSITORY }}:rc.${{ github.RUN_NUMBER }}
 
 jobs:
 #  Test:
@@ -88,12 +88,12 @@ jobs:
     name: Clean Up
     runs-on: ubuntu-latest
     steps:
-      - name: Delete old images
+      - name: Delete old release candidates
         uses: snok/container-retention-policy@v1
         with:
-          image-names: weather-store
+          image-names: ${{ github.REPOSITORY }}
           cut-off: One day ago UTC
-          filter-tags: build-*
+          filter-tags: rc.*
           account-type: personal
           token: ${{ secrets.PACKAGES_PAT }}
 
