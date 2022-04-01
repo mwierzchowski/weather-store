@@ -1,9 +1,8 @@
 name: Delivery
-on: push
+on:
   workflow_run:
     workflows:
-      - integration
-    branches: "*"
+      - "Integration"
     types:
       - completed
 
