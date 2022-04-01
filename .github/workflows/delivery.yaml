@@ -1,33 +1,26 @@
 name: Delivery
 on:
   workflow_run:
-    workflows:
-      - "Integration"
-    types:
-      - completed
-
-# TODO add requirement for main push
+    workflows: [Integration]
+    types: [completed]
 
 jobs:
   release:
     name: Release
-
     runs-on: ubuntu-latest
     steps:
       - name: Debug
         run: echo Placeholder job was triggered
 
   deploy:
-    needs:
-      - release
+    needs: [release]
     runs-on: ubuntu-latest
     steps:
         - name: Debug
           run: echo Placeholder job was triggered
 
   smoke-test:
-    needs:
-      - deploy
+    needs: [deploy]
     runs-on: ubuntu-latest
     steps:
       - name: Debug
