@@ -65,8 +65,9 @@ jobs:
           cache-from: type=gha,scope=${{ github.WORKFLOW }}
           cache-to: type=gha,scope=${{ github.WORKFLOW }}
 
-  functional-test:
-    name: Functional Test
+  # TODO change to build from PR
+  api-test:
+    name: API Test
     runs-on: ubuntu-latest
     needs:
       - test

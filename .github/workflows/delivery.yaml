@@ -1,0 +1,17 @@
+name: Delivery
+on:
+  workflow_run:
+    workflows:
+      - integration
+    types:
+      - completed
+
+# TODO add requirement for main push
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: DEBUG
+        run: echo JUST A PLACEHOLDER FOR REAL JOB
