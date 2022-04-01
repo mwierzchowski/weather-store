@@ -2,7 +2,7 @@ name: Delivery
 on:
   workflow_run:
     workflows:
-      - integration
+      - Integration
     branches: "*"
     types:
       - completed
