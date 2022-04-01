@@ -1,10 +1,11 @@
-name: integration
+name: Integration
 on: push
 env:
   BUILD_TAG: ghcr.io/${{ github.REPOSITORY }}:build-${{ github.RUN_NUMBER }}
 
 jobs:
   test:
+    name: Test
     runs-on: ubuntu-latest
     steps:
       - name: Set up build
@@ -33,6 +34,7 @@ jobs:
           coverageLocations: ${{ github.WORKSPACE }}/target/site/jacoco/jacoco.xml:jacoco
 
   build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -65,7 +67,7 @@ jobs:
 
   # TODO change to build from PR
   api-test:
-    name: api test
+    name: API Test
     runs-on: ubuntu-latest
     needs:
       - test
