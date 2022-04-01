@@ -18,8 +18,8 @@ jobs:
     needs: [release]
     runs-on: ubuntu-latest
     steps:
-        - name: Debug
-          run: echo Placeholder job was triggered
+      - name: Debug
+        run: echo Placeholder job was triggered
 
   smoke-test:
     name: Smoke Test
