@@ -1,4 +1,5 @@
 name: Delivery
+on:
   workflow_run:
     workflows: [Integration]
     types: [completed]
