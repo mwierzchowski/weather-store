@@ -1,24 +1,26 @@
 name: Delivery
-on: push
-#  workflow_run:
-#    workflows: [Integration]
-#    types: [completed]
+  workflow_run:
+    workflows: [Integration]
+    types: [completed]
 
 jobs:
-  Release:
+  release:
+    name: Release
     runs-on: ubuntu-latest
     steps:
       - name: Debug
         run: echo Placeholder job was triggered
 
-  Deploy:
+  deploy:
+    name: Deploy
     needs: [release]
     runs-on: ubuntu-latest
     steps:
         - name: Debug
           run: echo Placeholder job was triggered
 
-  Smoke-Test:
+  smoke-test:
+    name: Smoke Test
     needs: [deploy]
     runs-on: ubuntu-latest
     steps:
