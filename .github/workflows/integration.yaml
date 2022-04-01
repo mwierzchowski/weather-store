@@ -60,10 +60,16 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          push: false
-          tags: ${{ env.BUILD_TAG }}
+          tags: myimage
           cache-from: type=gha,scope=${{ github.WORKFLOW }}
           cache-to: type=gha,scope=${{ github.WORKFLOW }}
+          outputs: type=docker,dest=/tmp/myimage.tar
+
+      - name: Export image
+        uses: actions/upload-artifact@v2
+        with:
+          name: myimage
+          path: /tmp/myimage.tar
 
   # TODO change to build from PR
   api-test:
@@ -73,8 +79,13 @@ jobs:
       - test
       - build
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - name: Download image
+        uses: actions/download-artifact@v2
+        with:
+          name: myimage
+          path: /tmp
 
-      - name: DEBUG
-        run: echo JUST A PLACEHOLDER FOR REAL JOB
+      - name: Load image
+        run: |
+          docker load --input /tmp/myimage.tar
+          docker image ls -a
