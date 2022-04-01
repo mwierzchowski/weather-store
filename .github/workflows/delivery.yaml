@@ -1,17 +1,19 @@
 name: Delivery
-on:
-  workflow_run:
-    workflows:
-      - Integration
-    branches: "*"
-    types:
-      - completed
+on: push
+#  workflow_run:
+#    workflows:
+#      - Integration
+#    branches: "*"
+#    types:
+#      - completed
 
 # TODO add requirement for main push
 
 jobs:
   release:
     name: Release
+    needs:
+      - api-test
     runs-on: ubuntu-latest
     steps:
       - name: Debug
