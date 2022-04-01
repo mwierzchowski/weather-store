@@ -3,11 +3,11 @@ on:
   workflow_run:
     workflows: [integration]
     types: [completed]
-    branches: [5-continous-delivery]
 
 jobs:
   release:
     name: Release
+    if: ${{ github.EVENT.WORKFLOW_RUN.CONCLUSION == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - name: Debug
