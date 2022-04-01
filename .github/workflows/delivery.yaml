@@ -10,9 +10,25 @@ on:
 # TODO add requirement for main push
 
 jobs:
-  test:
-    name: Test
+  release:
+    name: Release
     runs-on: ubuntu-latest
     steps:
-      - name: DEBUG
-        run: echo JUST A PLACEHOLDER FOR REAL JOB
+      - name: Debug
+        run: echo Placeholder job was triggered
+
+  deploy:
+    needs:
+      - release
+    runs-on: ubuntu-latest
+    steps:
+        - name: Debug
+          run: echo Placeholder job was triggered
+
+  smoke-test:
+    needs:
+      - deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Debug
+        run: echo Placeholder job was triggered
