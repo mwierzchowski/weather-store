@@ -141,5 +141,4 @@ jobs:
         run: docker pull ${{ env.BUILD_TAG }}
 
       - name: Load image
-        run: |
-          docker image ls -a
+        run:  docker image ls -a
