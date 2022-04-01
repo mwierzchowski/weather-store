@@ -13,6 +13,7 @@ jobs:
         run: echo Placeholder job was triggered
 
   deploy:
+    name: Deploy
     needs: [release]
     runs-on: ubuntu-latest
     steps:
@@ -20,6 +21,7 @@ jobs:
           run: echo Placeholder job was triggered
 
   smoke-test:
+    name: Smoke Test
     needs: [deploy]
     runs-on: ubuntu-latest
     steps:
