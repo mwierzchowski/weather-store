@@ -63,9 +63,6 @@ jobs:
       - name: Run test environment
         run: docker-compose -f docker-compose.srv.yml -f docker-compose.app.yml up -d
 
-      # http://localhost:8080/actuator/health
-      # http://localhost:8080/v3/api-docs
-
   Build:
     runs-on: ubuntu-latest
     steps:
@@ -96,3 +93,6 @@ jobs:
           tags: ghcr.io/${{ github.REPOSITORY }}:${{ github.RUN_NUMBER }}
           cache-from: type=gha
           cache-to: type=gha
+
+      # http://localhost:8080/actuator/health
+      # http://localhost:8080/v3/api-docs
