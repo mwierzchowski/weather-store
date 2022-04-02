@@ -50,4 +50,4 @@ jobs:
 
       # http://localhost:8080/actuator/health
       # http://localhost:8080/v3/api-docs
-      - name: Wait for
+#      - name: Wait for
