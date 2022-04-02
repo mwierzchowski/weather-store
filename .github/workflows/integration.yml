@@ -57,8 +57,8 @@ jobs:
           push: false
           load: true
           tags: ${{ env.APP_IMAGE }}
-          cache-from: type=gha
-          cache-to: type=gha
+          cache-from: type=gha,scope=${{ github.WORKFLOW }}
+          cache-to: type=gha,scope=${{ github.WORKFLOW }}
 
       - name: Run test environment
         run: docker-compose -f docker-compose.srv.yml -f docker-compose.app.yml up -d
@@ -92,8 +92,8 @@ jobs:
           push: false
           load: true
           tags: ghcr.io/${{ github.REPOSITORY }}:${{ github.RUN_NUMBER }}
-          cache-from: type=gha
-          cache-to: type=gha
+          cache-from: type=gha,scope=${{ github.WORKFLOW }}
+          cache-to: type=gha,scope=${{ github.WORKFLOW }}
 
       # http://localhost:8080/actuator/health
       # http://localhost:8080/v3/api-docs
