@@ -36,8 +36,8 @@ jobs:
           context: .
           push: true
           tags: ${{ env.BUILD_TAG }}
-          cache-from: type=gha,scope=${{ github.WORKFLOW }}
-          cache-to: type=gha,scope=${{ github.WORKFLOW }}
+          cache-from: type=gha
+          cache-to: type=gha
 
   Deploy:
     needs: [Release]
