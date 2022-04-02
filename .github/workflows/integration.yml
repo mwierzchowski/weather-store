@@ -63,7 +63,7 @@ jobs:
       - name: Run test environment
         run: docker-compose -f docker-compose.srv.yml -f docker-compose.app.yml up -d
 
-  Build:
+  Build2:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
