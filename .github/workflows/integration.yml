@@ -57,7 +57,7 @@ jobs:
       # http://localhost:8080/actuator/health
       # http://localhost:8080/v3/api-docs
 
-  Build:
+  Build2:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
