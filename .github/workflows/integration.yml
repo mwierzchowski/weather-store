@@ -62,7 +62,7 @@ jobs:
 
       - name: Health check
         run: |
-          docker run --network=${{ github.REPOSITORY }}_dev_network curlimages/curl:latest \
+          docker run --network=${{ github.event.repository.name }}_dev_network curlimages/curl:latest \
             http://app:8080/actuator/health \
             --retry 30 \
             --retry-delay 1 \
