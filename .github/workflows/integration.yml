@@ -51,22 +51,14 @@ jobs:
         run: |
           docker-compose -f docker-compose.srv.yml -f docker-compose.app.yml up -d
 
-#      - name: Health check
-#        uses: docker://curlimages/curl:latest
-#        with:
-#          args: http://localhost:8080/actuator/health \
-#                --connect-timeout 5 \
-#                --retry 30 \
-#                --retry-delay 1 \
-#                --retry-all-errors
-
       - name: Health check
         run: |
-          docker run --network=${{ github.event.repository.name }}_dev_network curlimages/curl:latest \
-            http://app:8080/actuator/health \
-            --retry 30 \
+          docker run --network=${{ github.event.repository.name }}_dev_network \
+            curlimages/curl:latest http://app:8080/actuator/health \
+            --retry-all-errors \
             --retry-delay 1 \
-            --retry-all-errors
+            --retry 30 \
+            --connect-timeout 5
 
       - name: Download API spec
         run: |
