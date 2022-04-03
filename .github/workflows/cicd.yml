@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: CI/CD
 on: push
 env:
   BUILD_TAG: ghcr.io/${{ github.REPOSITORY }}:${{ github.RUN_NUMBER }}
@@ -67,9 +67,7 @@ jobs:
 
       - name: Download API Spec
         run: |
-          wget http://localhost:8080/v3/api-docs \
-            --output-document ${{ env.OPENAPI_SPEC }}
-            --tries 1 
+          wget http://localhost:8080/v3/api-docs --output-document ${{ env.OPENAPI_SPEC }}            
 
       - name: Publish API Spec
         uses: actions/upload-artifact@v3
