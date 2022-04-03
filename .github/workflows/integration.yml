@@ -56,12 +56,20 @@ jobs:
           docker ps
           curl http://localhost:8080/actuator/health
 
-      - name: Check service health
-        uses: jtalk/url-health-check-action@v2
+      - name: Check the deployed service URL
+        uses: seveibar/url-health-check-action@v1.10
         with:
           url: http://localhost:8080/actuator/health
-          max-attempts: 30
-          retry-delay: 1s
+          max-time: 1m
+          request-timeout: 10s
+          max-attempts: 10
+
+#      - name: Check service health
+#        uses: jtalk/url-health-check-action@v2
+#        with:
+#          url: http://localhost:8080/actuator/health
+#          max-attempts: 30
+#          retry-delay: 1s
 
       - name: Get API spec
         run: |
