@@ -53,12 +53,19 @@ jobs:
 
       - name: Health check
         run: |
-          docker run --network=${{ github.event.repository.name }}_dev_network \
-            curlimages/curl:latest http://app:8080/actuator/health \
+          sudo apt install curl
+          curl --version
+          curl http://app:8080/actuator/health \
             --retry-all-errors \
             --retry-delay 1 \
             --retry 30 \
             --connect-timeout 5
+#          docker run --network=${{ github.event.repository.name }}_dev_network \
+#            curlimages/curl:latest http://app:8080/actuator/health \
+#            --retry-all-errors \
+#            --retry-delay 1 \
+#            --retry 30 \
+#            --connect-timeout 5
 
       - name: Download API spec
         run: |
