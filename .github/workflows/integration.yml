@@ -58,8 +58,7 @@ jobs:
           --connect-timeout 5 \
           --retry 30 \
           --retry-delay 1 \
-          --retry-connrefused \ 
-          --insecure
+          --retry-connrefused
 
       - name: Download API spec
         run: |
