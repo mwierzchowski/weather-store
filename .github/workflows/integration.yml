@@ -54,7 +54,7 @@ jobs:
       - name: Health check
         run: |
           sleep 15
-          curl http://localhost:8080/actuator/health \
+          curl 'http://localhost:8080/actuator/health' \
           --connect-timeout 5 \
           --retry 30 \
           --retry-delay 1 \
