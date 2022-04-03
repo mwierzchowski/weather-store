@@ -52,5 +52,19 @@ jobs:
         run: |
           docker-compose -f docker-compose.srv.yml -f docker-compose.app.yml up -d
 
-      # http://localhost:8080/actuator/health
-      # http://localhost:8080/v3/api-docs
+      - name: Check service health
+        uses: jtalk/url-health-check-action@v2
+        with:
+          url: http://localhost:8080/actuator/health
+          max-attempts: 30
+          retry-delay: 1s
+
+      - name: Get API spec
+        run: |
+          wget -O openapi.json http://localhost:8080/v3/api-docs
+
+      - name: Publish API spec
+        uses: actions/upload-artifact@v3
+        with:
+          name: API spec
+          path: ${{ github.WORKSPACE }}/openapi.json
