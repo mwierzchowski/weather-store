@@ -62,7 +62,8 @@ jobs:
 
       - name: Health check
         run: |
-          docker run --network=dev_network curlimages/curl:latest \
+          docker network ls
+          docker run --network=weather-store_dev_network curlimages/curl:latest \
           http://app:8080/actuator/health \
           --connect-timeout 5 \
           --retry 30 \
