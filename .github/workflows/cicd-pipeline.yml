@@ -37,6 +37,7 @@ jobs:
 
   sanity-check:
     name: Sanity Check
+    if: github.event.pull_request.opened == true
     runs-on: ubuntu-latest
     env:
       OPENAPI_SPEC: ${{ github.WORKSPACE }}/openapi.json
