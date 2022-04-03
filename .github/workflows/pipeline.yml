@@ -58,7 +58,7 @@ jobs:
 
       - name: Health check
         run: |
-          docker run --network host curlimages/curl:7:82.0 \
+          docker run --network host curlimages/curl:7.82.0 \
             http://localhost:8080/actuator/health \
             --retry-all-errors \
             --retry-delay 1 \
