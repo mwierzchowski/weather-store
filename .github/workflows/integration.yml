@@ -51,6 +51,10 @@ jobs:
         run: |
           docker-compose -f docker-compose.srv.yml -f docker-compose.app.yml up -d
 
+      - name: Debug
+        run: |
+          curl --version
+
       - name: Health check
         run: |
           curl http://localhost:8080/actuator/health \
