@@ -1,7 +1,5 @@
 name: CI/CD
-on:
-  - push
-  - pull_request
+on: [push]
 env:
   BUILD_TAG: ghcr.io/${{ github.REPOSITORY }}:${{ github.RUN_NUMBER }}
 
@@ -42,7 +40,7 @@ jobs:
 
   sanity-check:
     name: Sanity Check
-    if: github.event_name == 'pull_request'
+    if: startsWith(github.ref, 'refs/pull/')
     runs-on: ubuntu-latest
     env:
       OPENAPI_SPEC: ${{ github.WORKSPACE }}/openapi.json
