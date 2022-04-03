@@ -51,14 +51,14 @@ jobs:
         run: |
           docker-compose -f docker-compose.srv.yml -f docker-compose.app.yml up -d
 
-      - name: Check service health
+      - name: Health check
         run: |
           curl http://localhost:8080/actuator/health \
           --retry 30 \
           --retry-delay 1 \
-          --retry-all-errors
+          --retry-connrefused
 
-      - name: Get API spec
+      - name: Download API spec
         run: |
           wget -O openapi.json http://localhost:8080/v3/api-docs
 
