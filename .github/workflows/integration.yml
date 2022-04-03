@@ -51,25 +51,12 @@ jobs:
         run: |
           docker-compose -f docker-compose.srv.yml -f docker-compose.app.yml up -d
 
-#      - name: Healthcheck debug
-#        run: |
-#          docker ps
-#          curl http://localhost:8080/actuator/health
-
-      - name: Check the deployed service URL
-        uses: seveibar/url-health-check-action@v1.10
-        with:
-          url: http://localhost:8080/actuator/health
-          max-time: 1m
-          request-timeout: 10s
-          max-attempts: 10
-
-#      - name: Check service health
-#        uses: jtalk/url-health-check-action@v2
-#        with:
-#          url: http://localhost:8080/actuator/health
-#          max-attempts: 30
-#          retry-delay: 1s
+      - name: Check service health
+        run: |
+          curl http://localhost:8080/actuator/health \
+          --retry 30 \
+          --retry-delay 1 \
+          --retry-all-errors
 
       - name: Get API spec
         run: |
