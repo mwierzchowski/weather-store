@@ -51,12 +51,9 @@ jobs:
         run: |
           docker-compose -f docker-compose.srv.yml -f docker-compose.app.yml up -d
 
-      - name: Debug
-        run: |
-          curl --version
-
       - name: Health check
         run: |
+          sleep 15
           curl http://localhost:8080/actuator/health \
           --connect-timeout 5 \
           --retry 30 \
