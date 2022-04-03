@@ -38,7 +38,7 @@ jobs:
           coverageLocations: ${{ github.WORKSPACE }}/target/site/jacoco/jacoco.xml:jacoco
 
   sanity-check:
-    name: Sanity Check
+    name: Sanity Check 2
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     env:
