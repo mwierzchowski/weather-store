@@ -62,21 +62,11 @@ jobs:
 
       - name: Health check
         run: |
-          docker network ls
-          docker run --network=weather-store_dev_network curlimages/curl:latest \
-          http://app:8080/actuator/health \
-          --connect-timeout 5 \
-          --retry 30 \
-          --retry-delay 1 \
-          --retry-all-errors
-
-#      - name: Health check
-#        run: |
-#          curl "http://localhost:8080/actuator/health" \
-#          --connect-timeout 5 \
-#          --retry 30 \
-#          --retry-delay 1 \
-#          --retry-connrefused
+          docker run --network=${{ github.REPOSITORY }}_dev_network curlimages/curl:latest \
+            http://app:8080/actuator/health \
+            --retry 30 \
+            --retry-delay 1 \
+            --retry-all-errors
 
       - name: Download API spec
         run: |
