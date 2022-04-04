@@ -2,7 +2,6 @@ name: CI/CD
 on:
   push:
 env:
-  BUILD_NAME: ghcr.io/${{ github.REPOSITORY }}
   BUILD_TAG: ghcr.io/${{ github.REPOSITORY }}:${{ github.RUN_NUMBER }}
   DOCKER_BUILDKIT: 1
 
@@ -133,7 +132,7 @@ jobs:
       - name: Remove old releases
         uses: snok/container-retention-policy@v1
         with:
-          image-names: ${{ env.BUILD_NAME }}
+          image-names: ${{ github.event.repository.name }}
           cut-off: 1 second ago UTC+1
           account-type: personal
           keep-at-least: 1
