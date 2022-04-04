@@ -38,7 +38,7 @@ jobs:
           coverageLocations: ${{ github.WORKSPACE }}/target/site/jacoco/jacoco.xml:jacoco
 
   image-check:
-    name: Image Check
+    name: Image check
     runs-on: ubuntu-latest
     env:
       OPENAPI_SPEC: ${{ github.WORKSPACE }}/openapi.json
@@ -57,22 +57,21 @@ jobs:
           docker-compose -f docker-compose.srv.yml -f docker-compose.app.yml up -d
 
       - name: Health check
-        run: |
-          docker run --network host curlimages/curl:7.82.0 \
-            http://localhost:8080/actuator/health \
-            --retry-all-errors \
-            --retry-delay 1 \
-            --retry 20 \
-            --connect-timeout 5
+        uses: nev7n/wait_for_response@v1
+        with:
+          url: 'http://localhost:8080/actuator/health'
+          responseCode: 200
+          timeout: 20000
+          interval: 1000
 
-      - name: Download API Spec
+      - name: Download API spec
         run: |
           wget http://localhost:8080/v3/api-docs --output-document ${{ env.OPENAPI_SPEC }}            
 
-      - name: Publish API Spec
+      - name: Publish API spec
         uses: actions/upload-artifact@v3
         with:
-          name: API Spec
+          name: API spec
           path: ${{ env.OPENAPI_SPEC }}
 
   release:
@@ -102,7 +101,7 @@ jobs:
           username: ${{ github.REPOSITORY_OWNER }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build image
+      - name: Build and publish
         uses: docker/build-push-action@v2
         with:
           context: .
@@ -110,3 +109,13 @@ jobs:
           tags: ${{ env.BUILD_TAG }}
           cache-from: type=gha
           cache-to: type=gha
+
+      - name: Remove old releases
+        uses: snok/container-retention-policy@v1
+        with:
+          image-names: ${{ github.event.repository.name }}
+          cut-off: 1 second ago UTC+1
+          account-type: personal
+          keep-at-least: 2
+          skip-tags: latest
+          token: ${{ secrets.PACKAGES_PAT }}
