@@ -1,11 +1,11 @@
 name: CI/CD
-on: [push]
+on: [push, pull_request]
 env:
   BUILD_TAG: ghcr.io/${{ github.REPOSITORY }}:${{ github.RUN_NUMBER }}
 
 jobs:
   build-and-test:
-    name: Build & Test 2
+    name: Build & Test
     runs-on: ubuntu-latest
     steps:
       - name: Set up build
