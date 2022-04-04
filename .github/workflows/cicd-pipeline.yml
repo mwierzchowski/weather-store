@@ -3,7 +3,7 @@ on:
   push:
 env:
   BUILD_NAME: ghcr.io/${{ github.REPOSITORY }}
-  BUILD_TAG: ${{ BUILD_NAME }}:${{ github.RUN_NUMBER }}
+  BUILD_TAG: ghcr.io/${{ github.REPOSITORY }}:${{ github.RUN_NUMBER }}
   DOCKER_BUILDKIT: 1
 
 jobs:
