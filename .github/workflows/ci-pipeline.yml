@@ -5,6 +5,7 @@ on:
 jobs:
   build-and-test:
     name: Build & Test
+    if: !startsWith(github.ref, 'refs/pull/') && github.ref != 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Set up build
