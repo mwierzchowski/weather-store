@@ -43,7 +43,6 @@ jobs:
 
   sanity-check:
     name: Sanity Check
-    if: github.ref != 'refs/heads/main'
     runs-on: ubuntu-latest
     env:
       OPENAPI_SPEC: ${{ github.WORKSPACE }}/openapi.json
