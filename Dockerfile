@@ -11,7 +11,7 @@ ADD pom.xml .
 ADD src src
 ADD .git .git
 RUN --mount=type=cache,target=/root/.m2 \
-    mvn package -DskipTests
+    mvn package -DskipTests --no-transfer-progress
 RUN java -Djarmode=layertools -jar target/*.jar extract --destination ${LAYERS_DIR}
 
 FROM eclipse-temurin:17.0.2_8-jre-alpine
