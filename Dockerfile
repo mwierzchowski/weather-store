@@ -7,9 +7,10 @@ ARG LAYERS_DIR
 WORKDIR ${BUILD_DIR}
 RUN mkdir -p ${LAYERS_DIR}
 ADD lombok.config .
-ADD pom.xml .
+ADD pom.yml .
 ADD src src
 ADD .git .git
+ADD .mvn .mvn
 RUN --mount=type=cache,target=/root/.m2 \
     mvn package -DskipTests --no-transfer-progress
 RUN java -Djarmode=layertools -jar target/*.jar extract --destination ${LAYERS_DIR}
