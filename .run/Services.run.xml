@@ -3,8 +3,9 @@
     <deployment type="docker-compose.yml">
       <settings>
         <option name="buildKitEnabledForCompose" value="true" />
+        <option name="composeProjectName" value="$PROJECT_NAME$" />
         <option name="envFilePath" value="" />
-        <option name="sourceFilePath" value="docker-compose.srv.yml" />
+        <option name="sourceFilePath" value="etc/docker-compose.srv.yml" />
         <option name="upRemoveOrphans" value="true" />
       </settings>
     </deployment>

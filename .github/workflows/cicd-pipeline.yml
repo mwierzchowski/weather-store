@@ -54,7 +54,8 @@ jobs:
 
       - name: Run test env
         run: |
-          docker-compose -f docker-compose.srv.yml -f docker-compose.app.yml up -d
+          docker-compose -p ${{ github.event.repository.name }} \
+            -f etc/docker-compose.srv.yml -f etc/docker-compose.app.yml up -d
 
       - name: Health check
         run: |

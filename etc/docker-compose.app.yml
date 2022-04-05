@@ -1,6 +1,6 @@
 services:
   app:
-    build: .
+    build: ..
     depends_on:
       - postgres
     networks:
