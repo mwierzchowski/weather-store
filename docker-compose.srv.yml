@@ -12,14 +12,6 @@ services:
     volumes:
       - database_data:/var/lib/postgresql/data
 
-  redis:
-    image: redis:6.0.9-alpine
-    networks:
-      dev_network:
-        aliases: [cache]
-    ports:
-      - 6379:6379
-
   pg-admin4:
     image: dpage/pgadmin4:6.7
     networks:
