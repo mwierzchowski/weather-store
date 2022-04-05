@@ -7,3 +7,12 @@ info.app:
 management:
   endpoints.web.exposure.include: '*'
   endpoint.health.show-details: always
+
+# Database
+spring:
+  jpa:
+    open-in-view: false
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
