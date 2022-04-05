@@ -9,4 +9,4 @@ services:
     ports:
       - 8080:8080
     environment:
-      - spring_datasource_url=jdbc:postgresql://localhost:5432/postgres
+      - spring_datasource_url=jdbc:postgresql://database:5432/postgres
