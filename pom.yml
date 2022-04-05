@@ -5,6 +5,9 @@ parent:
   version: 2.6.6
   relativePath: ''
 
+name: Weather Store
+description: Storage service for weather conditions
+
 artifactId: weather-store
 groupId: com.github.mwierzchowski
 version: 1

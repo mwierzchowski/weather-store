@@ -1,7 +1,7 @@
 # Application info
 info.app:
-  name: Weather Store
-  description: Storage service for weather conditions
+  name: @project.name@
+  description: @project.description@
 
 # Actuator
 management:
