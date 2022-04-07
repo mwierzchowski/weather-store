@@ -1,0 +1,102 @@
+modelVersion: 4.0.0
+parent:
+  artifactId: spring-boot-starter-parent
+  groupId: org.springframework.boot
+  version: 2.6.6
+  relativePath: ''
+
+name: Weather Store
+description: Storage service for weather conditions
+
+artifactId: weather-store
+groupId: com.github.mwierzchowski
+version: 1
+
+properties:
+  java.version: 15
+  gmavenplus-plugin.version: 1.13.1
+  jacoco-plugin.version: 0.8.7
+  mapstruct.version: 1.4.2.Final
+  springdoc.version: 1.6.6
+  spock.version: 2.1-groovy-3.0
+
+dependencies:
+  # Annotation processors
+  - artifactId: lombok
+    groupId: org.projectlombok
+    optional: true
+
+  - artifactId: mapstruct-processor
+    groupId: org.mapstruct
+    version: ${mapstruct.version}
+    optional: true
+
+  # REST API
+  - artifactId: spring-boot-starter-web
+    groupId: org.springframework.boot
+
+  - artifactId: spring-boot-starter-validation
+    groupId: org.springframework.boot
+
+  - artifactId: mapstruct
+    groupId: org.mapstruct
+    version: ${mapstruct.version}
+
+  - artifactId: springdoc-openapi-webmvc-core
+    groupId: org.springdoc
+    version: ${springdoc.version}
+
+  # Database
+  - artifactId: spring-boot-starter-data-jpa
+    groupId: org.springframework.boot
+
+  - artifactId: postgresql
+    groupId: org.postgresql
+
+  - artifactId: liquibase-core
+    groupId: org.liquibase
+
+  - artifactId: h2
+    groupId: com.h2database
+    scope: test
+
+  # Telemetry
+  - artifactId: spring-boot-starter-actuator
+    groupId: org.springframework.boot
+
+  # Testing support
+  - artifactId: spring-boot-starter-test
+    groupId: org.springframework.boot
+    scope: test
+
+  - artifactId: spock-spring
+    groupId: org.spockframework
+    version: ${spock.version}
+    scope: test
+
+  # Development support
+  - artifactId: spring-boot-devtools
+    groupId: org.springframework.boot
+    optional: true
+
+build:
+  plugins:
+    - artifactId: spring-boot-maven-plugin
+      groupId: org.springframework.boot
+      executions:
+        - goals: [build-info]
+
+    - artifactId: gmavenplus-plugin
+      groupId: org.codehaus.gmavenplus
+      version: ${gmavenplus-plugin.version}
+      executions:
+        - goals: [compileTests]
+
+    - artifactId: git-commit-id-plugin
+      groupId: pl.project13.maven
+
+    - artifactId: jacoco-maven-plugin
+      groupId: org.jacoco
+      version: ${jacoco-plugin.version}
+      configuration:
+        formats: XML

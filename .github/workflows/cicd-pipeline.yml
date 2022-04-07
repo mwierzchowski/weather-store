@@ -54,15 +54,17 @@ jobs:
 
       - name: Run test env
         run: |
-          docker-compose -f docker-compose.srv.yml -f docker-compose.app.yml up -d
+          docker-compose -p ${{ github.event.repository.name }} \
+            -f etc/docker-compose.srv.yml -f etc/docker-compose.app.yml up -d
 
       - name: Health check
-        uses: nev7n/wait_for_response@v1
-        with:
-          url: 'http://localhost:8080/actuator/health'
-          responseCode: 200
-          timeout: 20000
-          interval: 1000
+        run: |
+          docker run --network host curlimages/curl:7.82.0 \
+            http://localhost:8080/actuator/health \
+            --retry-all-errors \
+            --retry-delay 1 \
+            --retry 20 \
+            --connect-timeout 5
 
       - name: Download API spec
         run: |
