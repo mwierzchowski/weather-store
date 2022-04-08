@@ -3,6 +3,10 @@ info.app:
   name: @project.name@
   description: @project.description@
 
+# Loggers
+logging.level:
+  @project.groupId@: DEBUG
+
 # Actuator
 management:
   endpoints.web.exposure.include: '*'
