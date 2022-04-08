@@ -1,4 +1,4 @@
-package com.github.mwierzchowski.weather.store.api;
+package com.github.mwierzchowski.weather.store.web;
 
 import com.github.mwierzchowski.weather.store.core.Temperature;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -10,7 +10,7 @@ import javax.validation.constraints.PastOrPresent;
 import lombok.Data;
 
 @Data
-@Schema(description = "Weather conditions data transfer object")
+@Schema(description = "Weather observation data")
 public class WeatherDto {
     @NotNull
     @PastOrPresent
