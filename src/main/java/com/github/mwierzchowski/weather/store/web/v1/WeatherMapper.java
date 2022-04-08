@@ -1,4 +1,4 @@
-package com.github.mwierzchowski.weather.store.web;
+package com.github.mwierzchowski.weather.store.web.v1;
 
 import com.github.mwierzchowski.weather.store.core.Weather;
 import org.mapstruct.InheritInverseConfiguration;

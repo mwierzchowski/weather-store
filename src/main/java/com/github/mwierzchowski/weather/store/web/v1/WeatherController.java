@@ -1,4 +1,4 @@
-package com.github.mwierzchowski.weather.store.web;
+package com.github.mwierzchowski.weather.store.web.v1;
 
 import com.github.mwierzchowski.weather.store.core.WeatherService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Weather", description = "Weather store resource")
 @AllArgsConstructor
 @Slf4j
-public class WeatherControllerV1 {
+public class WeatherController {
     private final WeatherMapper mapper;
     private final WeatherService service;
 

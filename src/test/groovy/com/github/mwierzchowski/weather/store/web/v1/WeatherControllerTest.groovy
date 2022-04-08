@@ -1,8 +1,8 @@
-package com.github.mwierzchowski.weather.store.web
+package com.github.mwierzchowski.weather.store.web.v1
 
 import spock.lang.Specification
 
-class WeatherControllerV1Test extends Specification {
+class WeatherControllerTest extends Specification {
     def "Submit successful if valid observation"() {
     }
 
