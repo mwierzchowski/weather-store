@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/web/v1/weather")
+@RequestMapping("/api/v1/weather")
 @Tag(name = "Weather", description = "Weather store resource")
 @AllArgsConstructor
 @Slf4j
