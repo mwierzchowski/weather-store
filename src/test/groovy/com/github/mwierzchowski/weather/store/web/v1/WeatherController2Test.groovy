@@ -3,14 +3,12 @@ package com.github.mwierzchowski.weather.store.web.v1
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
-import spock.lang.Ignore
 import spock.lang.Specification
 
 import java.time.Instant
 
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT
 
-//@Ignore
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 class WeatherController2Test extends Specification {
     @Autowired
