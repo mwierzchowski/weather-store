@@ -71,16 +71,16 @@ jobs:
       - name: Smoke test
         run: |
           curl -X 'POST' \
-            '${{ BASE_URL }}' \
+            '${{ env.BASE_URL }}' \
             -H 'accept: */*' \
             -H 'Content-Type: application/json' \
             -d '{
-              "observed": "${{ TIMESTAMP }}",
+              "observed": "${{ env.TIMESTAMP }}",
               "temperature": 7,
               "temperatureUnit": "C"
           }'
           curl -X 'GET' \
-            '${{ BASE_URL }}/${{ TIMESTAMP }}' \
+            '${{ env.BASE_URL }}/${{ env.TIMESTAMP }}' \
             -H 'accept: */*'
 
       - name: Download API spec
