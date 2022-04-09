@@ -22,7 +22,10 @@ interface WeatherMapper {
     Weather weatherFrom(WeatherDto weatherDto);
 
     default String speedUnitSymbolFrom(Speed.Unit unit) {
-        return unit != null ? unit.getSymbol() : null;
+        if (unit == null) {
+            return null;
+        }
+        return unit.getSymbol();
     }
 
     default Speed.Unit speedUnitFrom(String symbol) {
