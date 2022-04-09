@@ -66,6 +66,24 @@ jobs:
             --retry 20 \
             --connect-timeout 5
 
+      - name: Smoke test
+        env:
+          URL: http://localhost:8080/api/v1/weather
+          TIMESTAMP: 2022-03-20T21:22:47.685Z
+        run: |
+          curl -X 'POST' \
+            '${{ URL }}' \
+            -H 'accept: */*' \
+            -H 'Content-Type: application/json' \
+            -d '{
+              "observed": "${{ TIMESTAMP }}",
+              "temperature": 7,
+              "temperatureUnit": "C"
+          }'
+          curl -X 'GET' \
+            '${{ URL }}/${{ TIMESTAMP }}' \
+            -H 'accept: */*'
+
       - name: Download API spec
         run: |
           wget http://localhost:8080/v3/api-docs --output-document ${{ env.OPENAPI_SPEC }}            
