@@ -10,7 +10,7 @@ import java.time.Instant
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
-class WeatherController2Test extends Specification {
+class WeatherControllerTest extends Specification {
     @Autowired
     TestRestTemplate restTemplate
 
