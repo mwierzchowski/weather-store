@@ -80,6 +80,10 @@ dependencies:
     optional: true
 
 build:
+  testResources:
+    - directory: src/test/resources
+      filtering: true
+
   plugins:
     - artifactId: spring-boot-maven-plugin
       groupId: org.springframework.boot

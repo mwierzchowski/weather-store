@@ -5,7 +5,8 @@ info.app:
 
 # Loggers
 logging.level:
-  @project.groupId@: DEBUG
+  root: WARN
+  @project.groupId@: INFO
 
 # Actuator
 management:
