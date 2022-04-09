@@ -68,11 +68,11 @@ jobs:
 
       - name: Smoke test
         env:
-          URL: http://localhost:8080/api/v1/weather
+          BASE_URL: http://localhost:8080/api/v1/weather
           TIMESTAMP: 2022-03-20T21:22:47.685Z
         run: |
           curl -X 'POST' \
-            '${{ URL }}' \
+            '${{ BASE_URL }}' \
             -H 'accept: */*' \
             -H 'Content-Type: application/json' \
             -d '{
@@ -81,7 +81,7 @@ jobs:
               "temperatureUnit": "C"
           }'
           curl -X 'GET' \
-            '${{ URL }}/${{ TIMESTAMP }}' \
+            '${{ BASE_URL }}/${{ TIMESTAMP }}' \
             -H 'accept: */*'
 
       - name: Download API spec
