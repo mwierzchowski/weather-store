@@ -42,6 +42,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       OPENAPI_SPEC: ${{ github.WORKSPACE }}/openapi.json
+      BASE_URL: http://localhost:8080/api/v1/weather
+      TIMESTAMP: 2022-03-20T21:22:47.685Z
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -67,9 +69,6 @@ jobs:
             --connect-timeout 5
 
       - name: Smoke test
-        env:
-          BASE_URL: 'http://localhost:8080/api/v1/weather'
-          TIMESTAMP: '2022-03-20T21:22:47.685Z'
         run: |
           curl -X 'POST' \
             '${{ BASE_URL }}' \
