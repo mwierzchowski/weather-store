@@ -68,8 +68,8 @@ jobs:
 
       - name: Smoke test
         env:
-          BASE_URL: http://localhost:8080/api/v1/weather
-          TIMESTAMP: 2022-03-20T21:22:47.685Z
+          BASE_URL: 'http://localhost:8080/api/v1/weather'
+          TIMESTAMP: '2022-03-20T21:22:47.685Z'
         run: |
           curl -X 'POST' \
             '${{ BASE_URL }}' \
