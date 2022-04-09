@@ -8,8 +8,10 @@ import spock.lang.Specification
 
 import java.time.Instant
 
-@Ignore
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT
+
+//@Ignore
+@SpringBootTest(webEnvironment = RANDOM_PORT)
 class WeatherController2Test extends Specification {
     @Autowired
     TestRestTemplate restTemplate
