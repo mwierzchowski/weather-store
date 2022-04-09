@@ -8,8 +8,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.time.Instant;
 import java.util.NoSuchElementException;
 import javax.validation.Valid;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/weather")
 @Tag(name = "Weather", description = "Weather store resource")
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Slf4j
 public class WeatherController {
     private final WeatherMapper mapper;
@@ -52,5 +54,11 @@ public class WeatherController {
         var weatherDto = mapper.weatherDtoFrom(weather);
         LOGGER.debug("Weather retrieved: {}", weatherDto);
         return weatherDto;
+    }
+
+    @ExceptionHandler(NoSuchElementException.class)
+    protected ResponseEntity<Object> handleException(NoSuchElementException ex) {
+        return ResponseEntity.noContent()
+                .build();
     }
 }

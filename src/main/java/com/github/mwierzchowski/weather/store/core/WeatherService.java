@@ -1,21 +1,23 @@
 package com.github.mwierzchowski.weather.store.core;
 
-import java.time.ZonedDateTime;
+import java.time.Instant;
 import java.util.Optional;
-import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
-@Slf4j
 public class WeatherService {
+    protected Weather weather;
+
     public void submit(Weather weather) {
-        // TODO
+        // TODO dummy implementation
+        this.weather = weather;
     }
 
-    public Optional<Weather> findFor(ZonedDateTime time) {
-        // TODO
-        return null;
+    public Optional<Weather> findFor(Instant time) {
+        // TODO dummy implementation
+        if (weather == null || !time.equals(weather.getObserved())) {
+            return Optional.empty();
+        }
+        return Optional.of(weather);
     }
 }
