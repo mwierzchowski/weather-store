@@ -16,7 +16,7 @@ class BucketCalculatorTest extends Specification {
         var calculator = new BucketCalculator(zero, size)
 
         expect:
-        calculator.bucketFrom(timestamp) == bucket
+        calculator.bucketIdFrom(timestamp) == bucket
 
         where:
         zero         | size | timestamp    || bucket
@@ -75,7 +75,7 @@ class BucketCalculatorTest extends Specification {
 
     def "Bucket calculation fails if timestamp is before bucket zero begins"() {
         when:
-        new BucketCalculator(nowMinus(100), 10).bucketFrom(nowMinus(101))
+        new BucketCalculator(nowMinus(100), 10).bucketIdFrom(nowMinus(101))
 
         then:
         IllegalArgumentException ex = thrown()

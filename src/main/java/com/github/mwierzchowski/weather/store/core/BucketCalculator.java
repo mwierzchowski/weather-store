@@ -29,25 +29,25 @@ public class BucketCalculator {
         }
         this.bucketZero = bucketZero.toEpochMilli();
         this.bucketSize = bucketSize * 60 * 1000;
-        LOGGER.info("Using bucket zero at {} and size of {}min", bucketZero, bucketSize);
+        LOGGER.info("Using bucket zero at {} and size of {}min(s)", bucketZero, bucketSize);
     }
 
-    public Long bucketFrom(Instant timestamp) {
+    public Long bucketIdFrom(Instant timestamp) {
         var timeDiff = timestamp.toEpochMilli() - bucketZero;
         if (timeDiff < 0) {
             throw new IllegalArgumentException("Timestamp must be after bucket zero begins");
         }
-        var bucket = timeDiff / bucketSize;
-        LOGGER.debug("Timestamp {} belongs to bucket {}", timestamp, bucket);
-        return bucket;
+        var bucketId = timeDiff / bucketSize;
+        LOGGER.debug("Timestamp {} belongs to bucket {}", timestamp, bucketId);
+        return bucketId;
     }
 
-    public Instant timestampFrom(Long bucket) {
-        if (bucket < 0) {
-            throw new IllegalArgumentException("Bucket must be bigger or equal zero");
+    public Instant timestampFrom(Long bucketId) {
+        if (bucketId < 0) {
+            throw new IllegalArgumentException("Bucket id must be bigger or equal zero");
         }
-        var timestamp = Instant.ofEpochMilli(bucketZero + bucket * bucketSize);
-        LOGGER.debug("Bucket {} started at {}", bucket, timestamp);
+        var timestamp = Instant.ofEpochMilli(bucketZero + bucketId * bucketSize);
+        LOGGER.debug("Bucket {} starts at {}", bucketId, timestamp);
         return timestamp;
     }
 }
