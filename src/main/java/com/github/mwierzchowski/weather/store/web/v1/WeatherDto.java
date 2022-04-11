@@ -17,7 +17,7 @@ public class WeatherDto {
     @Schema(description = "Observation timestamp in UTC", example = "2022-03-20T21:22:47.685Z")
     private Instant observed;
 
-    @Min(-100)
+    @Min(-273)
     @Max(100)
     @Schema(description = "Temperature value", example = "7.0")
     private Double temperature;
