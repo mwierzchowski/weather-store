@@ -1,7 +1,7 @@
 ARG BUILD_DIR=/usr/build
 ARG LAYERS_DIR=${BUILD_DIR}/target/layers
 
-FROM maven:3.8.4-eclipse-temurin-17-alpine AS maven-builder
+FROM maven:3.8.5-eclipse-temurin-17-alpine AS maven-builder
 ARG BUILD_DIR
 ARG LAYERS_DIR
 WORKDIR ${BUILD_DIR}
