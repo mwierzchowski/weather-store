@@ -16,7 +16,7 @@ class WeatherControllerTest extends Specification {
 
     String baseUrl = "/api/v1/weather/"
 
-    def "Submit succeeds if valid weather observation"() {
+    def "Submit succeeds if valid weather data"() {
         given:
         def weatherDto = new WeatherDto().tap {
             observed = Instant.now()
@@ -28,7 +28,7 @@ class WeatherControllerTest extends Specification {
         result.getStatusCodeValue() == 200
     }
 
-    def "Submit fails if invalid weather observation"() {
+    def "Submit fails if invalid weather data"() {
         given:
         def weatherDto = new WeatherDto()
         when:
@@ -37,7 +37,7 @@ class WeatherControllerTest extends Specification {
         result.getStatusCodeValue() == 400
     }
 
-    def "Retrieve weather observation if available"() {
+    def "Retrieve weather if available"() {
         given:
         def time = Instant.now()
         def weatherDto = new WeatherDto().tap {
@@ -52,9 +52,9 @@ class WeatherControllerTest extends Specification {
         response.getBody() == weatherDto
     }
 
-    def "Retrieve empty weather observation if not available"() {
+    def "Retrieve empty weather if not available"() {
         given:
-        def time = Instant.now().minusMillis(1000)
+        def time = Instant.now().plusMillis(1000000)
         when:
         var response = restTemplate.getForEntity(baseUrl + time, WeatherDto)
         then:
