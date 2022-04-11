@@ -5,6 +5,7 @@
         <option name="buildKitEnabledForCompose" value="true" />
         <option name="composeProjectName" value="$PROJECT_NAME$" />
         <option name="envFilePath" value="" />
+        <option name="removeVolumesOnComposeDown" value="true" />
         <option name="sourceFilePath" value="etc/docker-compose.srv.yml" />
         <option name="upRemoveOrphans" value="true" />
       </settings>
