@@ -1,6 +1,7 @@
 package com.github.mwierzchowski.weather.store.core;
 
 import java.time.Instant;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class BucketCalculator {
     /**
-     * Timestamp of the bucket zero.
+     * Timestamp of the bucket 0.
      */
     private final long bucketZero;
 
@@ -19,34 +20,34 @@ public class BucketCalculator {
     private final Integer bucketSize;
 
     public BucketCalculator(
-            @Value("${weather.bucket.zero:2022-01-01T00:00:00.000Z}") Instant bucketZero,
-            @Value("${weather.bucket.size:10}") Integer bucketSize) {
+            @NonNull @Value("${weather.bucket.zero:2022-01-01T00:00:00.000Z}") Instant bucketZero,
+            @NonNull @Value("${weather.bucket.size:10}") Integer bucketSize) {
         if (bucketZero.isAfter(Instant.now())) {
-            throw new IllegalArgumentException("Bucket zero must be in the past");
+            throw new IllegalArgumentException("Bucket 0 must be in the past");
         }
         if (bucketSize <= 0) {
-            throw new IllegalArgumentException("Bucket size must be bigger than 0 mins");
+            throw new IllegalArgumentException("Bucket size must be bigger than 0");
         }
         this.bucketZero = bucketZero.toEpochMilli();
         this.bucketSize = bucketSize * 60 * 1000;
-        LOGGER.info("Using bucket zero at {} and size of {}min(s)", bucketZero, bucketSize);
+        LOGGER.info("Initialized with bucket 0 at {} and size of {}min(s)", bucketZero, bucketSize);
     }
 
-    public Long bucketIdFrom(Instant timestamp) {
+    public Integer bucketIdFrom(@NonNull Instant timestamp) {
         var timeDiff = timestamp.toEpochMilli() - bucketZero;
         if (timeDiff < 0) {
-            throw new IllegalArgumentException("Timestamp must be after bucket zero begins");
+            throw new IllegalArgumentException("Timestamp must be after bucket 0 begins");
         }
         var bucketId = timeDiff / bucketSize;
         LOGGER.debug("Timestamp {} belongs to bucket {}", timestamp, bucketId);
-        return bucketId;
+        return (int) bucketId;
     }
 
-    public Instant timestampFrom(Long bucketId) {
+    public Instant timestampFrom(@NonNull Integer bucketId) {
         if (bucketId < 0) {
             throw new IllegalArgumentException("Bucket id must be bigger or equal zero");
         }
-        var timestamp = Instant.ofEpochMilli(bucketZero + bucketId * bucketSize);
+        var timestamp = Instant.ofEpochMilli(bucketZero + (long) bucketId * bucketSize);
         LOGGER.debug("Bucket {} starts at {}", bucketId, timestamp);
         return timestamp;
     }

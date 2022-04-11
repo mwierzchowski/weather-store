@@ -53,7 +53,7 @@ class BucketCalculatorTest extends Specification {
 
         then:
         IllegalArgumentException ex = thrown()
-        ex.message.containsIgnoreCase("bucket zero")
+        ex.message.containsIgnoreCase("bucket 0")
     }
 
     def "Constructor fails if bucket size is less or equal zero"() {
@@ -74,8 +74,12 @@ class BucketCalculatorTest extends Specification {
     }
 
     def "Bucket calculation fails if timestamp is before bucket zero begins"() {
+        given:
+        def bucketZero = nowMinus(100)
+        def timestamp = nowMinus(101)
+
         when:
-        new BucketCalculator(nowMinus(100), 10).bucketIdFrom(nowMinus(101))
+        new BucketCalculator(bucketZero, 10).bucketIdFrom(timestamp)
 
         then:
         IllegalArgumentException ex = thrown()
@@ -83,8 +87,11 @@ class BucketCalculatorTest extends Specification {
     }
 
     def "Timestamp calculation fails if bucket is less than zero"() {
+        given:
+        def bucketId = -1
+
         when:
-        new BucketCalculator(nowMinus(0), 10).timestampFrom(-1)
+        new BucketCalculator(now, 10).timestampFrom(bucketId)
 
         then:
         IllegalArgumentException ex = thrown()
