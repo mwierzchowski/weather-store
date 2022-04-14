@@ -33,21 +33,21 @@ public class BucketCalculator {
         LOGGER.info("Initialized with bucket 0 at {} and size of {}min(s)", bucketZero, bucketSize);
     }
 
-    public Integer bucketIdFrom(@NonNull Instant timestamp) {
+    public Long bucketIdFrom(@NonNull Instant timestamp) {
         var timeDiff = timestamp.toEpochMilli() - bucketZero;
         if (timeDiff < 0) {
             throw new IllegalArgumentException("Timestamp must be after bucket 0 begins");
         }
         var bucketId = timeDiff / bucketSize;
         LOGGER.debug("Timestamp {} belongs to bucket {}", timestamp, bucketId);
-        return (int) bucketId;
+        return bucketId;
     }
 
-    public Instant timestampFrom(@NonNull Integer bucketId) {
+    public Instant timestampFrom(@NonNull Long bucketId) {
         if (bucketId < 0) {
             throw new IllegalArgumentException("Bucket id must be bigger or equal zero");
         }
-        var timestamp = Instant.ofEpochMilli(bucketZero + (long) bucketId * bucketSize);
+        var timestamp = Instant.ofEpochMilli(bucketZero + bucketId * bucketSize);
         LOGGER.debug("Bucket {} starts at {}", bucketId, timestamp);
         return timestamp;
     }

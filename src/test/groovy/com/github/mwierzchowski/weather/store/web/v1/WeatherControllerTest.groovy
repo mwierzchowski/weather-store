@@ -49,7 +49,7 @@ class WeatherControllerTest extends Specification {
         var response = restTemplate.getForEntity(baseUrl + time, WeatherDto)
         then:
         response.getStatusCodeValue() == 200
-        response.getBody() == weatherDto
+        response.getBody().temperature == weatherDto.temperature
     }
 
     def "Retrieve empty weather if not available"() {
