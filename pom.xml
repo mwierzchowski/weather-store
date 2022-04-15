@@ -12,7 +12,7 @@
 
     <groupId>com.github.mwierzchowski</groupId>
     <artifactId>weather-store</artifactId>
-    <version>1</version>
+    <version>RC</version>
 
     <properties>
         <java.version>15</java.version>
