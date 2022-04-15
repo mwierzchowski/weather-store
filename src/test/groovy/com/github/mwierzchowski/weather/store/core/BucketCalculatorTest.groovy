@@ -14,10 +14,8 @@ class BucketCalculatorTest extends Specification {
     def "Calculates bucket from timestamp"() {
         given:
         var calculator = new BucketCalculator(zero, size)
-
         expect:
         calculator.bucketIdFrom(timestamp) == bucket
-
         where:
         zero         | size | timestamp    || bucket
         nowMinus(60) |   10 | nowMinus(60) ||      0
@@ -31,10 +29,8 @@ class BucketCalculatorTest extends Specification {
     def "Calculates timestamp from bucket"() {
         given:
         var calculator = new BucketCalculator(zero, size)
-
         expect:
         calculator.timestampFrom(bucket).truncatedTo(SECONDS) == timestamp.truncatedTo(SECONDS)
-
         where:
         zero         | size | bucket || timestamp
         nowMinus(60) |   10 |      0 || nowMinus(60)
@@ -47,10 +43,8 @@ class BucketCalculatorTest extends Specification {
         given:
         def bucketZero = now.plusMillis(10000)
         def bucketSize = 10
-
         when:
         new BucketCalculator(bucketZero, bucketSize)
-
         then:
         IllegalArgumentException ex = thrown()
         ex.message.containsIgnoreCase("bucket 0")
@@ -59,14 +53,11 @@ class BucketCalculatorTest extends Specification {
     def "Constructor fails if bucket size is less or equal zero"() {
         given:
         def zero = nowMinus(10)
-
         when:
         new BucketCalculator(zero, size)
-
         then:
         IllegalArgumentException ex = thrown()
         ex.message.containsIgnoreCase("bucket size")
-
         where:
         size | _
            0 | _
@@ -77,10 +68,8 @@ class BucketCalculatorTest extends Specification {
         given:
         def bucketZero = nowMinus(100)
         def timestamp = nowMinus(101)
-
         when:
         new BucketCalculator(bucketZero, 10).bucketIdFrom(timestamp)
-
         then:
         IllegalArgumentException ex = thrown()
         ex.message.containsIgnoreCase("timestamp")
@@ -89,10 +78,8 @@ class BucketCalculatorTest extends Specification {
     def "Timestamp calculation fails if bucket is less than zero"() {
         given:
         def bucketId = -1
-
         when:
         new BucketCalculator(now, 10).timestampFrom(bucketId)
-
         then:
         IllegalArgumentException ex = thrown()
         ex.message.containsIgnoreCase("bucket")
