@@ -68,7 +68,7 @@ jobs:
           username: ${{ github.REPOSITORY_OWNER }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
-      - name: Run test env
+      - name: Run image
         run: |
           docker-compose -p ${{ github.event.repository.name }} \
             -f etc/docker-compose.srv.yml -f etc/docker-compose.app.yml up -d
