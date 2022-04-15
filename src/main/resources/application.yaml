@@ -6,12 +6,6 @@ info.app:
 # Loggers
 logging.level:
   root: WARN
-  @project.groupId@: DEBUG
-
-# Actuator
-management:
-  endpoints.web.exposure.include: '*'
-  endpoint.health.show-details: always
 
 # Web
 spring.jackson.default-property-inclusion: NON_NULL
@@ -27,3 +21,15 @@ spring:
     open-in-view: false
     properties.hibernate:
       jdbc.batch_size: 5
+
+---
+spring.config.activate.on-profile: dev
+
+# Loggers
+logging.level:
+  @project.groupId@: DEBUG
+
+# Actuator
+management:
+  endpoints.web.exposure.include: '*'
+  endpoint.health.show-details: always
