@@ -24,10 +24,7 @@ jobs:
 
       - name: Build and test
         env:
-          spring_jpa_database-platform: org.hibernate.dialect.PostgreSQLDialect
-          spring_datasource_url: jdbc:postgresql://localhost:5432/postgres
-          spring_datasource_username: postgres
-          spring_datasource_password: postgres
+          spring_profiles_active: int
         run: |
           mvn jacoco:prepare-agent verify surefire-report:report-only jacoco:report \
             --no-transfer-progress
