@@ -1,10 +1,11 @@
 package com.github.mwierzchowski.weather.store.core;
 
 import java.time.Instant;
+import java.util.stream.Stream;
 import lombok.Data;
 
 /**
- * Represents weather conditions.
+ * Represents weather observations.
  * @author Marcin Wierzchowski
  */
 @Data
@@ -24,8 +25,14 @@ public class Weather {
      */
     private Wind wind;
 
+    private WindDirection windDirection;
+
     /**
      * Clouds coverage (percentage).
      */
-    private Integer cloudsCoverage;
+    private CloudsCoverage cloudsCoverage;
+
+    public Stream<Observation<? extends StorageConvertible>> observations() {
+        return Stream.of(temperature, wind, windDirection, cloudsCoverage);
+    }
 }

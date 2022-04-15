@@ -1,20 +1,29 @@
-# Application info
+# Info
 info.app:
   name: @project.name@
   description: @project.description@
+
+# Loggers
+logging.level:
+  root: WARN
+  @project.groupId@: DEBUG
 
 # Actuator
 management:
   endpoints.web.exposure.include: '*'
   endpoint.health.show-details: always
 
+# Web
+spring.jackson.default-property-inclusion: NON_NULL
+
 # Database
 spring:
-  jpa:
-    open-in-view: false
-  show-sql: true
-  properties.hibernate.format_sql: true
+  liquibase.change-log: liquibase-changelog.xml
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: postgres
+  jpa:
+    open-in-view: false
+    properties.hibernate:
+      jdbc.batch_size: 5

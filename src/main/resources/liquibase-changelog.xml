@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+    <changeSet id="1" author="mwierzchowski">
+        <createTable tableName="observation">
+            <column name="id" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="bucket_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dtype" type="tinyint(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value" type="float(2)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createSequence sequenceName="observation_id_seq"
+                        minValue="1" startValue="50" incrementBy="50"/>
+
+        <createIndex tableName="observation" indexName="observation_bucket_idx">
+            <column name="bucket_id"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

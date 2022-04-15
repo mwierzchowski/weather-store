@@ -1,8 +1,8 @@
-package com.github.mwierzchowski.weather.store.api;
+package com.github.mwierzchowski.weather.store.web.v1;
 
 import com.github.mwierzchowski.weather.store.core.Temperature;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.util.Date;
+import java.time.Instant;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -10,15 +10,13 @@ import javax.validation.constraints.PastOrPresent;
 import lombok.Data;
 
 @Data
-@Schema(description = "Weather conditions data transfer object")
+@Schema(description = "Weather observation data")
 public class WeatherDto {
     @NotNull
     @PastOrPresent
-    @Schema(description = "UTC time of observation", example = "2022-03-20T21:22:47.685Z")
-    private Date observed;
+    @Schema(description = "Observation timestamp in UTC", example = "2022-03-20T21:22:47.685Z")
+    private Instant observed;
 
-    @Min(-100)
-    @Max(100)
     @Schema(description = "Temperature value", example = "7.0")
     private Double temperature;
 
