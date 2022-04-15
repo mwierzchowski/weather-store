@@ -8,7 +8,7 @@
     </parent>
 
     <name>Weather Store</name>
-    <description>Storage service for weather conditions</description>
+    <description>Storage service for weather observations</description>
 
     <groupId>com.github.mwierzchowski</groupId>
     <artifactId>weather-store</artifactId>
