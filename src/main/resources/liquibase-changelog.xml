@@ -19,7 +19,8 @@
             </column>
         </createTable>
 
-        <createSequence sequenceName="observation_id_seq" minValue="1" startValue="50" incrementBy="50"/>
+        <createSequence sequenceName="observation_id_seq"
+                        minValue="1" startValue="50" incrementBy="50"/>
 
         <createIndex tableName="observation" indexName="observation_bucket_idx">
             <column name="bucket_id"/>
