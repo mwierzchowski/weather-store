@@ -1,7 +1,7 @@
 package com.github.mwierzchowski.weather.store.web.v1;
 
-import com.github.mwierzchowski.weather.store.core.Wind;
 import com.github.mwierzchowski.weather.store.core.Weather;
+import com.github.mwierzchowski.weather.store.core.Wind;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
