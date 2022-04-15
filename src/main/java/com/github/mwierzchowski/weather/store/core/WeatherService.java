@@ -25,10 +25,8 @@ public class WeatherService {
         weather.observations().filter(Observation::isNotEmpty).forEach(observation -> {
             observation.setBucketId(bucketId);
             observation.useDefaultIfMissingUnit(unitService::defaultUnit);
-            // TODO batch mode?
             entityManager.persist(observation);
-            LOGGER.debug("Persisting {} observation",
-                    observation.getClass().getSimpleName());
+            LOGGER.debug("Persisting {} observation", observation.getClass().getSimpleName());
         });
     }
 

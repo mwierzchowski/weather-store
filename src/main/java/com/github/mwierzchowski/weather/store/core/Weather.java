@@ -25,12 +25,14 @@ public class Weather {
      */
     private Wind wind;
 
+    private WindDirection windDirection;
+
     /**
      * Clouds coverage (percentage).
      */
-    private Integer cloudsCoverage;
+    private CloudsCoverage cloudsCoverage;
 
-    public Stream<Observation<? extends BaseConvertible>> observations() {
-        return Stream.of(temperature);
+    public Stream<Observation<? extends StorageConvertible>> observations() {
+        return Stream.of(temperature, wind, windDirection, cloudsCoverage);
     }
 }

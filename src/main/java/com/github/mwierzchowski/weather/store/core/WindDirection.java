@@ -6,29 +6,22 @@ import javax.persistence.Entity;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-/**
- * Represents temperature value in given units (see {@link Temperature.Unit}).
- * @author Marcin Wierzchowski
- */
-
 @Entity
-@DiscriminatorValue("1")
-public class Temperature extends Observation<Temperature.Unit> {
-    public Temperature() {
-        super(Unit.C);
+@DiscriminatorValue("3")
+public class WindDirection extends Observation<WindDirection.Unit> {
+    public WindDirection() {
+        super(Unit.DEGREES);
     }
 
     @Override
     public void addTo(Weather weather) {
-        weather.setTemperature(this);
+        weather.setWindDirection(this);
     }
 
     @Getter
     @RequiredArgsConstructor
     public enum Unit implements StorageConvertible {
-        C(c -> c, c -> c),
-        F(f -> (f - 32) * 5 / 9, c -> c * 9 / 5 + 32f),
-        K(k -> k - 273.15f, c -> c + 273.15f);
+        DEGREES(d -> d, d -> d);
 
         private final Function<Float, Float> toStorageConverter;
         private final Function<Float, Float> fromStorageConverter;

@@ -4,14 +4,15 @@ import java.util.Objects;
 import java.util.function.Function;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.NamedQuery;
 import javax.persistence.PostLoad;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Transient;
-import javax.persistence.Version;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Hibernate;
 
 import static javax.persistence.DiscriminatorType.INTEGER;
+import static javax.persistence.GenerationType.SEQUENCE;
 
 @Slf4j
 @Entity
@@ -32,32 +34,33 @@ import static javax.persistence.DiscriminatorType.INTEGER;
 @DiscriminatorColumn(discriminatorType = INTEGER)
 @NamedQuery(name = "Observation.findByBucketId",
         query = "SELECT o FROM Observation o WHERE o.bucketId = :bucketId")
-public abstract class Observation<U extends BaseConvertible> {
+public abstract class Observation<U extends StorageConvertible> {
     @Id
+    @GeneratedValue(strategy = SEQUENCE, generator="observation_id_seq")
+    @SequenceGenerator(name="observation_id_seq", sequenceName="observation_id_seq")
+    private Long id;
+
     private Long bucketId;
 
     private Float value;
 
     @Transient
-    private final U baseUnit;
+    private final U storageUnit;
 
     @Transient
     private U unit;
 
-    @Version
-    private Short version;
-
     @PreUpdate
     @PrePersist
     public void normalize() {
-        LOGGER.debug("Normalizing {} to {}", getClass().getSimpleName(), baseUnit);
-        convertTo(baseUnit);
+        LOGGER.debug("Normalizing {} to storage unit: {}", getClass().getSimpleName(), storageUnit);
+        convertTo(storageUnit);
     }
 
     @PostLoad
     public void initialize() {
-        LOGGER.debug("Initializing {} with {}", getClass().getSimpleName(), baseUnit);
-        unit = baseUnit;
+        LOGGER.debug("Initializing {} with storage unit: {}", getClass().getSimpleName(), storageUnit);
+        unit = storageUnit;
     }
 
     public void useDefaultIfMissingUnit(Function<Observation<U>, U> defaultUnitProvider) {
@@ -79,11 +82,11 @@ public abstract class Observation<U extends BaseConvertible> {
         var oldValue = value;
         var oldUnit = unit;
         if (isNotEmpty()) {
-            var baseValue = unit.getToBaseConverter().apply(value);
-            value = otherUnit.getFromBaseConverter().apply(baseValue);
+            var baseValue = unit.getToStorageConverter().apply(value);
+            value = otherUnit.getFromStorageConverter().apply(baseValue);
         }
         unit = otherUnit;
-        LOGGER.debug("Converted {} {}{} to {}{}", getClass().getSimpleName(),
+        LOGGER.debug("Converted {} {} {} to {} {}", getClass().getSimpleName(),
                 oldValue, oldUnit, value, unit);
     }
 
