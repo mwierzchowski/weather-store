@@ -1,4 +1,5 @@
 ARG JAVA_VERSION=17.0.2_8
+ARG BUILD_VERSION=DEV
 ARG BUILD_DIR=/usr/build
 ARG LAYERS_DIR=${BUILD_DIR}/target/layers
 
@@ -13,6 +14,8 @@ ADD lombok.config .
 ADD pom.xml .
 ADD src src
 ADD .git .git
+RUN --mount=type=cache,target=/root/.m2 \
+    ./mvnw versions:set -DnewVersion=${BUILD_VERSION} --no-transfer-progress
 RUN --mount=type=cache,target=/root/.m2 \
     ./mvnw package -DskipTests --no-transfer-progress
 RUN java -Djarmode=layertools -jar target/*.jar extract --destination ${LAYERS_DIR}

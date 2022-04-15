@@ -2,7 +2,8 @@ name: CI/CD
 on:
   push:
 env:
-  BUILD_TAG: ghcr.io/${{ github.REPOSITORY }}:${{ github.RUN_NUMBER }}
+  BUILD_VERSION: v${{ github.RUN_NUMBER }}
+  BUILD_TAG: ghcr.io/${{ github.REPOSITORY }}:v${{ github.RUN_NUMBER }}
   DOCKER_BUILDKIT: 1
 
 jobs:
@@ -129,6 +130,8 @@ jobs:
           tags: ${{ env.BUILD_TAG }}
           cache-from: type=gha
           cache-to: type=gha
+          build-args: |
+            BUILD_VERSION=${{ env.BUILD_VERSION }}
 
       - name: Remove old releases
         uses: snok/container-retention-policy@v1
