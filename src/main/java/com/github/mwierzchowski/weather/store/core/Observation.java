@@ -59,7 +59,8 @@ public abstract class Observation<U extends StorageConvertible> {
 
     @PostLoad
     public void initialize() {
-        LOGGER.debug("Initializing {} with storage unit: {}", getClass().getSimpleName(), storageUnit);
+        LOGGER.debug("Initializing {} with storage unit: {}",
+                getClass().getSimpleName(), storageUnit);
         unit = storageUnit;
     }
 
@@ -97,11 +98,14 @@ public abstract class Observation<U extends StorageConvertible> {
     public abstract void addTo(Weather weather);
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o))
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) {
             return false;
-        Observation<?> that = (Observation<?>) o;
+        }
+        Observation<?> that = (Observation<?>) other;
         return bucketId != null && Objects.equals(bucketId, that.bucketId);
     }
 
