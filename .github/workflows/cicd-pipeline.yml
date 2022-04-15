@@ -24,6 +24,7 @@ jobs:
 
       - name: Build and test
         env:
+          spring_datasource_driver-class-name: org.postgresql.Driver
           spring_datasource_url: jdbc:postgresql://localhost:5432/postgres
           spring_datasource_username: postgres
           spring_datasource_password: postgres
