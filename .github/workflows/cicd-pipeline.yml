@@ -17,18 +17,18 @@ jobs:
         env:
           POSTGRES_PASSWORD: postgres
     steps:
-      - name: Set up build
-        uses: s4u/setup-maven-action@v1.3.1
+      - name: Setup Java
+        uses: actions/setup-java@v3
         with:
           java-version: '17'
-          java-distribution: 'temurin'
-          maven-version: 3.8.4
+          distribution: 'temurin'
+          cache: 'maven'
 
       - name: Build and test
         env:
           spring_profiles_active: int
         run: |
-          mvn jacoco:prepare-agent verify surefire-report:report-only jacoco:report \
+          ./mvnw jacoco:prepare-agent verify surefire-report:report-only jacoco:report \
             --no-transfer-progress
 
       - name: Publish test report
