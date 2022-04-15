@@ -8,11 +8,11 @@
     </parent>
 
     <name>Weather Store</name>
-    <description>Storage service for weather conditions</description>
+    <description>Storage service for weather observations</description>
 
     <groupId>com.github.mwierzchowski</groupId>
     <artifactId>weather-store</artifactId>
-    <version>1</version>
+    <version>dev</version>
 
     <properties>
         <java.version>15</java.version>
@@ -114,6 +114,11 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <profiles>
+                        <profile>dev</profile>
+                    </profiles>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
