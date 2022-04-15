@@ -9,6 +9,11 @@ jobs:
   build-and-test:
     name: Build & Test
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:13.1-alpine
+        env:
+          POSTGRES_PASSWORD: postgres
     steps:
       - name: Set up build
         uses: s4u/setup-maven-action@v1.3.1
@@ -18,6 +23,10 @@ jobs:
           maven-version: 3.8.4
 
       - name: Build and test
+        env:
+          spring_datasource_url: jdbc:postgresql://localhost:5432/postgres
+          spring_datasource_username: postgres
+          spring_datasource_password: postgres
         run: |
           mvn jacoco:prepare-agent verify surefire-report:report-only jacoco:report \
             --no-transfer-progress
