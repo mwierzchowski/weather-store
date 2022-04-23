@@ -2,7 +2,7 @@
 logging.level:
   root: INFO
   org.hibernate.SQL: DEBUG
-  @project.groupId@ : DEBUG
+  com.github.mwierzchowski: DEBUG
 
 # Database (embedded)
 spring:

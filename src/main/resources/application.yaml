@@ -1,8 +1,3 @@
-# Info
-info.app:
-  name: @project.name@
-  description: @project.description@
-
 # Loggers
 logging.level:
   root: WARN
@@ -27,7 +22,7 @@ spring.config.activate.on-profile: dev
 
 # Loggers
 logging.level:
-  @project.groupId@: DEBUG
+  com.github.mwierzchowski: DEBUG
 
 # Actuator
 management:
