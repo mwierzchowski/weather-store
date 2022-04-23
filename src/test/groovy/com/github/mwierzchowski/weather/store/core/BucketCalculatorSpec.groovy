@@ -7,7 +7,7 @@ import java.time.Instant
 
 import static java.time.temporal.ChronoUnit.SECONDS
 
-class BucketCalculatorTest extends Specification {
+class BucketCalculatorSpec extends Specification {
     @Shared
     def now = Instant.now()
 
