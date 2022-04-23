@@ -1,0 +1,61 @@
+plugins {
+    id 'java'
+    id 'groovy'
+    id "jacoco"
+    id 'org.springframework.boot' version '2.6.7'
+    id "com.gorylenko.gradle-git-properties" version "2.4.0"
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // BOMs
+    implementation platform("org.springframework.boot:spring-boot-dependencies:2.6.7")
+    testImplementation platform("org.spockframework:spock-bom:2.1-groovy-3.0")
+    // Annotation processors
+    annotationProcessor "org.projectlombok:lombok:1.18.22"
+    annotationProcessor "org.mapstruct:mapstruct-processor:1.4.2.Final"
+    // REST
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-validation"
+    implementation "org.springdoc:springdoc-openapi-webmvc-core:1.6.7"
+    // Database
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+    implementation "org.postgresql:postgresql"
+    implementation "org.liquibase:liquibase-core"
+    testImplementation "com.h2database:h2"
+    // Telemetry
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
+    // Various
+    compileOnly "org.projectlombok:lombok:1.18.22"
+    implementation "org.mapstruct:mapstruct:1.4.2.Final"
+    // Testing support
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.spockframework:spock-spring"
+    // Development support
+    developmentOnly "org.springframework.boot:spring-boot-devtools:2.6.7"
+}
+
+test {
+    useJUnitPlatform()
+    maxParallelForks 1
+    jacoco {
+        enabled = Boolean.getBoolean(System.getenv('TEST_COVERAGE') ?: 'false')
+    }
+}
+
+jacoco {
+    toolVersion = "0.8.8"
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+    }
+}
+
+bootRun {
+    environment = ['spring.profiles.active': 'dev']
+}
