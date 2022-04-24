@@ -9,6 +9,8 @@ jobs:
     services:
       postgres:
         image: postgres:13.1-alpine
+        ports:
+          - 5432:5432
         env:
           POSTGRES_PASSWORD: postgres
     steps:
@@ -60,6 +62,8 @@ jobs:
     services:
       postgres:
         image: postgres:13.1-alpine
+        ports:
+          - 5432:5432
         env:
           POSTGRES_PASSWORD: postgres
     steps:
