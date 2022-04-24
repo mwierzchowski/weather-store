@@ -1,8 +1,6 @@
 name: CI/CD
 on:
   push:
-env:
-  DOCKER_BUILDKIT: 1
 
 jobs:
   test:
@@ -11,8 +9,6 @@ jobs:
     services:
       postgres:
         image: postgres:13.1-alpine
-        ports:
-          - 5432:5432
         env:
           POSTGRES_PASSWORD: postgres
     steps:
@@ -57,14 +53,13 @@ jobs:
 #      - test
     runs-on: ubuntu-latest
     env:
+      DOCKER_BUILDKIT: 1
       BUILD_NAME: ghcr.io/${{ github.REPOSITORY }}
       BUILD_TAG: v${{ github.RUN_NUMBER }}
       OPENAPI_SPEC: ${{ github.WORKSPACE }}/openapi.json
     services:
       postgres:
         image: postgres:13.1-alpine
-        ports:
-          - 5432:5432
         env:
           POSTGRES_PASSWORD: postgres
     steps:
