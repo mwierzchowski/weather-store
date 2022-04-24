@@ -2,9 +2,6 @@ name: CI/CD
 on:
   push:
 env:
-  BUILD_NAME: ghcr.io/${{ github.REPOSITORY }}
-#  BUILD_TAG: ghcr.io/${{ github.REPOSITORY }}:v${{ github.RUN_NUMBER }}
-#  CACHE_TAG: ghcr.io/${{ github.REPOSITORY }}:buildcache
   DOCKER_BUILDKIT: 1
 
 jobs:
@@ -60,6 +57,8 @@ jobs:
 #      - test
     runs-on: ubuntu-latest
     env:
+      BUILD_NAME: ghcr.io/${{ github.REPOSITORY }}
+      BUILD_TAG: v${{ github.RUN_NUMBER }}
       OPENAPI_SPEC: ${{ github.WORKSPACE }}/openapi.json
     services:
       postgres:
@@ -96,7 +95,7 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ env.BUILD_NAME }}:v${{ github.RUN_NUMBER }}
+            ${{ env.BUILD_NAME }}:${{ env.BUILD_TAG }}
             ${{ env.BUILD_NAME }}:latest
           cache-from: type=registry,ref=${{ env.BUILD_NAME }}:latest
           cache-to: type=inline
@@ -105,7 +104,7 @@ jobs:
         env:
           spring_datasource_url=: dbc:postgresql://postgres:5432/postgres
         run: |
-          docker run --network host -d ${{ env.BUILD_NAME }}:v${{ github.RUN_NUMBER }}
+          docker run --network host -d ${{ env.BUILD_NAME }}:${{ env.BUILD_TAG }}
 
       - name: Health check
         run: |
