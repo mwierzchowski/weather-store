@@ -101,8 +101,6 @@ jobs:
           cache-to: type=registry,ref=${{ env.BUILD_NAME }}:buildcache,mode=max
 
       - name: Run container
-        env:
-          spring_datasource_url=: dbc:postgresql://postgres:5432/postgres
         run: |
           docker run --network host -d ${{ env.BUILD_NAME }}:${{ env.BUILD_TAG }}
 
