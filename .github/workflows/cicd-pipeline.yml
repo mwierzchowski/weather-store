@@ -3,6 +3,7 @@ on:
   push:
 env:
   BUILD_TAG: ghcr.io/${{ github.REPOSITORY }}:v${{ github.RUN_NUMBER }}
+  CACHE_TAG: ghcr.io/${{ github.REPOSITORY }}:buildcache
   DOCKER_BUILDKIT: 1
 
 jobs:
@@ -85,8 +86,8 @@ jobs:
           push: false
           load: true
           tags: ${{ env.BUILD_TAG }}
-          cache-from: type=gha
-          cache-to: type=gha
+          cache-from: type=registry,ref=${{ env.CACHE_TAG }}
+          cache-to: type=registry,ref=${{ env.CACHE_TAG }}
 
       - name: Run image
         env:
