@@ -1,33 +1,24 @@
 ARG JAVA_VERSION=17.0.2_8
-ARG BUILD_VERSION=dev
-ARG BUILD_DIR=/usr/build
-ARG LAYERS_DIR=${BUILD_DIR}/target/layers
+ARG LAYERS_DIR=/layers
 
-FROM eclipse-temurin:${JAVA_VERSION}-jdk-alpine AS maven-builder
-ARG BUILD_DIR
+FROM eclipse-temurin:${JAVA_VERSION}-jdk-alpine AS builder
 ARG LAYERS_DIR
-WORKDIR ${BUILD_DIR}
-RUN mkdir -p ${LAYERS_DIR}
-ADD .mvn .mvn
-ADD mvnw .
-ADD lombok.config .
-ADD pom.xml .
-ADD src src
-ADD .git .git
-RUN --mount=type=cache,target=/root/.m2 \
-    ./mvnw versions:set -DnewVersion=${BUILD_VERSION} --no-transfer-progress
-RUN --mount=type=cache,target=/root/.m2 \
-    ./mvnw package -DskipTests --no-transfer-progress
-RUN java -Djarmode=layertools -jar target/*.jar extract --destination ${LAYERS_DIR}
+WORKDIR /usr/app
+RUN mkdir ${LAYERS_DIR}
+ADD . .
+RUN --mount=type=cache,target=/root/.gradle \
+    ./gradlew clean build -x check --no-daemon
+RUN java -Djarmode=layertools -jar build/libs/app.jar extract --destination ${LAYERS_DIR}
+
 
 FROM eclipse-temurin:${JAVA_VERSION}-jre-alpine
 ARG LAYERS_DIR
 WORKDIR /usr/app
 RUN addgroup -S java && adduser -S java -G java
 USER java:java
-COPY --from=maven-builder ${LAYERS_DIR}/dependencies/ ./
-COPY --from=maven-builder ${LAYERS_DIR}/spring-boot-loader/ ./
-COPY --from=maven-builder ${LAYERS_DIR}/snapshot-dependencies/ ./
-COPY --from=maven-builder ${LAYERS_DIR}/application/ ./
+COPY --from=builder ${LAYERS_DIR}/dependencies/ ./
+COPY --from=builder ${LAYERS_DIR}/spring-boot-loader/ ./
+COPY --from=builder ${LAYERS_DIR}/snapshot-dependencies/ ./
+COPY --from=builder ${LAYERS_DIR}/application/ ./
 EXPOSE 8080
 ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
