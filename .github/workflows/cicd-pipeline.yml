@@ -131,6 +131,6 @@ jobs:
           image-names: ${{ github.event.repository.name }}
           cut-off: 1 second ago UTC+1
           account-type: personal
-          keep-at-least: 2
+          keep-at-least: 3
           skip-tags: latest, buildcache
           token: ${{ secrets.PACKAGES_PAT }}
