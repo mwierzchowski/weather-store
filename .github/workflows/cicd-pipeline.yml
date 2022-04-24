@@ -89,6 +89,8 @@ jobs:
           cache-to: type=gha
 
       - name: Run image
+        env:
+          spring_datasource_url=: dbc:postgresql://postgres:5432/postgres
         run: |
           docker run -p 8080:8080 ${{ env.BUILD_TAG }}
 
