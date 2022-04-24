@@ -3,8 +3,8 @@ ARG LAYERS_DIR=/layers
 
 FROM eclipse-temurin:${JAVA_VERSION}-jdk-alpine AS builder
 ARG LAYERS_DIR
-WORKDIR /usr/app
 RUN mkdir ${LAYERS_DIR}
+WORKDIR /usr/app
 ADD . .
 RUN --mount=type=cache,target=/root/.gradle \
     ./gradlew clean build -x check --console=plain
