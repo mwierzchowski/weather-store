@@ -34,7 +34,7 @@ jobs:
           CI_BUILD: true
           spring_profiles_active: int
         run: |
-          ./gradlew clean check jacocoTestReport -x generateGitProperties --console=plain
+          ./gradlew clean check jacocoTestReport -x generateGitProperties --console=plain --info
 
       - name: Publish test report
         uses: actions/upload-artifact@v3
@@ -56,6 +56,13 @@ jobs:
     runs-on: ubuntu-latest
     env:
       OPENAPI_SPEC: ${{ github.WORKSPACE }}/openapi.json
+    services:
+      postgres:
+        image: postgres:13.1-alpine
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_PASSWORD: postgres
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -68,10 +75,19 @@ jobs:
           username: ${{ github.REPOSITORY_OWNER }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
+      - name: Build image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: false
+          load: true
+          tags: ${{ env.BUILD_TAG }}
+          cache-from: type=gha
+          cache-to: type=gha
+
       - name: Run image
         run: |
-          docker-compose -p ${{ github.event.repository.name }} \
-            -f etc/docker-compose.srv.yml -f etc/docker-compose.app.yml up -d
+          docker run -p 8080:8080 -d ${{ env.BUILD_TAG }}
 
       - name: Health check
         run: |
