@@ -6,7 +6,10 @@ ARG LAYERS_DIR
 RUN mkdir ${LAYERS_DIR}
 ADD . /app
 WORKDIR /app
-RUN --mount=type=cache,target=/root/.gradle \
+RUN who am i
+RUN echo $HOME
+RUN --mount=type=cache,target=/${HOME}/.gradle \
+    --mount=type=cache,target=.gradle \
     ./gradlew clean build -x check --console=plain
 RUN java -Djarmode=layertools -jar build/libs/app.jar extract --destination ${LAYERS_DIR}
 
