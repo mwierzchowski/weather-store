@@ -52,8 +52,11 @@ jobs:
         with:
           coverageLocations: ${{ github.WORKSPACE }}/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
 
-  image-check:
-    name: Image check
+  build:
+    name: Build
+#    if: github.ref == 'refs/heads/main'
+#    needs:
+#      - test
     runs-on: ubuntu-latest
     env:
       OPENAPI_SPEC: ${{ github.WORKSPACE }}/openapi.json
@@ -120,6 +123,16 @@ jobs:
         with:
           name: API spec
           path: ${{ env.OPENAPI_SPEC }}
+
+      - name: Clean up
+        uses: snok/container-retention-policy@v1
+        with:
+          image-names: ${{ github.event.repository.name }}
+          cut-off: 1 second ago UTC+1
+          account-type: personal
+          keep-at-least: 2
+          skip-tags: latest, buildcache
+          token: ${{ secrets.PACKAGES_PAT }}
 
   release:
     name: Release
