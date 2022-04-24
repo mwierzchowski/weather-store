@@ -3,10 +3,10 @@ import org.springframework.boot.gradle.plugin.SpringBootPlugin
 plugins {
     id 'java'
     id 'groovy'
-    id "jacoco"
+    id 'jacoco'
     id 'org.springframework.boot' version '2.6.7'
-    id "io.spring.dependency-management" version "1.0.11.RELEASE"
-    id "com.gorylenko.gradle-git-properties" version "2.4.0"
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'com.gorylenko.gradle-git-properties' version '2.4.0'
 }
 
 repositories {
@@ -21,33 +21,33 @@ dependencyManagement {
 
 dependencies {
     // Annotation processors
-    annotationProcessor "org.projectlombok:lombok"
-    annotationProcessor "org.mapstruct:mapstruct-processor:1.4.2.Final"
+    annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
 
     // REST
-    implementation "org.springframework.boot:spring-boot-starter-web"
-    implementation "org.springframework.boot:spring-boot-starter-validation"
-    implementation "org.springdoc:springdoc-openapi-webmvc-core:1.6.7"
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springdoc:springdoc-openapi-webmvc-core:1.6.7'
 
     // Database
-    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
-    implementation "org.postgresql:postgresql"
-    implementation "org.liquibase:liquibase-core"
-    testImplementation "com.h2database:h2"
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.postgresql:postgresql'
+    implementation 'org.liquibase:liquibase-core'
+    testImplementation 'com.h2database:h2'
 
     // Telemetry
-    implementation "org.springframework.boot:spring-boot-starter-actuator"
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
     // Various
-    compileOnly "org.projectlombok:lombok"
-    implementation "org.mapstruct:mapstruct:1.4.2.Final"
+    compileOnly 'org.projectlombok:lombok'
+    implementation 'org.mapstruct:mapstruct:1.4.2.Final'
 
     // Testing support
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "org.spockframework:spock-spring:2.1-groovy-3.0"
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.spockframework:spock-spring:2.1-groovy-3.0'
 
     // Development support
-    developmentOnly "org.springframework.boot:spring-boot-devtools"
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
 }
 
 test {
@@ -58,7 +58,7 @@ test {
 }
 
 jacoco {
-    toolVersion = "0.8.8"
+    toolVersion = '0.8.8'
 }
 
 jacocoTestReport {
