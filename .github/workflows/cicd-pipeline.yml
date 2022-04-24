@@ -55,7 +55,6 @@ jobs:
 #      - test
     runs-on: ubuntu-latest
     env:
-      DOCKER_BUILDKIT: 1
       BUILD_NAME: ghcr.io/${{ github.REPOSITORY }}
       BUILD_TAG: v${{ github.RUN_NUMBER }}
       OPENAPI_SPEC: ${{ github.WORKSPACE }}/openapi.json
