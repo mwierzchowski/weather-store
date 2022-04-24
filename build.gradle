@@ -1,3 +1,5 @@
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
+
 plugins {
     id 'java'
     id 'groovy'
@@ -13,7 +15,7 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
+        mavenBom(SpringBootPlugin.BOM_COORDINATES)
         mavenBom "org.spockframework:spock-bom:2.1-groovy-3.0"
     }
 }
