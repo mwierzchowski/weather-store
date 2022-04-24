@@ -92,7 +92,7 @@ jobs:
         env:
           spring_datasource_url=: dbc:postgresql://postgres:5432/postgres
         run: |
-          docker run -p 8080:8080 ${{ env.BUILD_TAG }}
+          docker run -p 8080:8080 --network host ${{ env.BUILD_TAG }}
 
       - name: Health check
         run: |
