@@ -9,6 +9,12 @@ plugins {
     id 'com.gorylenko.gradle-git-properties' version '2.4.0'
 }
 
+dependencyManagement {
+    imports {
+        mavenBom(SpringBootPlugin.BOM_COORDINATES)
+    }
+}
+
 dependencies {
     // Annotation processors
     annotationProcessor 'org.projectlombok:lombok'
@@ -38,12 +44,6 @@ dependencies {
 
     // Development support
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
-}
-
-dependencyManagement {
-    imports {
-        mavenBom(SpringBootPlugin.BOM_COORDINATES)
-    }
 }
 
 repositories {
