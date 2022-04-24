@@ -2,7 +2,6 @@ name: CI/CD
 on:
   push:
 env:
-  BUILD_VERSION: v${{ github.RUN_NUMBER }}
   BUILD_TAG: ghcr.io/${{ github.REPOSITORY }}:v${{ github.RUN_NUMBER }}
   DOCKER_BUILDKIT: 1
 
