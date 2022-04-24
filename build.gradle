@@ -68,5 +68,5 @@ jacocoTestReport {
 }
 
 bootRun {
-    environment = ['spring.profiles.active': 'dev']
+    environment = ['spring.profiles.active' : 'dev']
 }
