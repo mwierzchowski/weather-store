@@ -97,8 +97,8 @@ jobs:
           tags: |
             ${{ env.BUILD_NAME }}:${{ env.BUILD_TAG }}
             ${{ env.BUILD_NAME }}:latest
-          cache-from: type=registry,ref=${{ github.REPOSITORY }}:buildcache
-          cache-to: type=registry,ref=${{ github.REPOSITORY }}:buildcache,mode=max
+          cache-from: type=registry,ref=${{ env.BUILD_NAME }}:buildcache
+          cache-to: type=registry,ref=${{ env.BUILD_NAME }}:buildcache,mode=max
 
       - name: Run container
         run: |

@@ -5,14 +5,14 @@ FROM eclipse-temurin:${JAVA_VERSION}-jdk-alpine AS builder
 ARG LAYERS_DIR
 RUN mkdir ${LAYERS_DIR}
 WORKDIR /app
-RUN --mount=type=bind,source=.git,target=/app/.git \
+RUN --mount=type=cache,target=/root/.gradle \
+    --mount=type=bind,source=.git,target=/app/.git \
     --mount=type=bind,source=gradle,target=/app/gradle \
     --mount=type=bind,source=src,target=/app/src \
     --mount=type=bind,source=build.gradle,target=/app/build.gradle \
     --mount=type=bind,source=gradle.properties,target=/app/gradle.properties \
     --mount=type=bind,source=gradlew,target=/app/gradlew \
     --mount=type=bind,source=lombok.config,target=/app/lombok.config \
-    --mount=type=cache,target=/root/.gradle \
     ./gradlew clean build -x check --console=plain --no-daemon --info
 RUN java -Djarmode=layertools -jar build/libs/app.jar extract --destination ${LAYERS_DIR}
 
