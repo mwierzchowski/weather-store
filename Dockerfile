@@ -7,7 +7,6 @@ RUN mkdir ${LAYERS_DIR}
 ADD . /app
 WORKDIR /app
 RUN --mount=type=cache,target=/root/.gradle/ \
-    --mount=type=cache,target=/app/.gradle/ \
     ./gradlew clean build -x check --console=plain --no-daemon --info
 RUN java -Djarmode=layertools -jar build/libs/app.jar extract --destination ${LAYERS_DIR}
 
