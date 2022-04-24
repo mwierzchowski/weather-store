@@ -7,8 +7,8 @@ env:
   DOCKER_BUILDKIT: 1
 
 jobs:
-  build-and-test:
-    name: Build & Test
+  test:
+    name: Test
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -28,21 +28,21 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: 'maven'
+          cache: 'gradle'
 
-      - name: Build and test
+      - name: Test
         env:
+          CI_BUILD: true
           spring_profiles_active: int
         run: |
-          ./mvnw jacoco:prepare-agent verify surefire-report:report-only jacoco:report \
-            --no-transfer-progress
+          ./gradlew clean check jacocoTestReport --no-daemon
 
       - name: Publish test report
         uses: actions/upload-artifact@v3
         if: always()
         with:
           name: Test report
-          path: ${{ github.WORKSPACE }}/target/site/surefire-report.html
+          path: ${{ github.WORKSPACE }}/build/reports/tests/test
 
       - name: Export test coverage
         uses: paambaati/codeclimate-action@v3.0.0
@@ -50,7 +50,7 @@ jobs:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
           JACOCO_SOURCE_PATH: ${{ github.WORKSPACE }}/src/main/java
         with:
-          coverageLocations: ${{ github.WORKSPACE }}/target/site/jacoco/jacoco.xml:jacoco
+          coverageLocations: ${{ github.WORKSPACE }}/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
 
   image-check:
     name: Image check
@@ -85,7 +85,7 @@ jobs:
 
       - name: Download API spec
         run: |
-          wget http://localhost:8080/v3/api-docs --output-document ${{ env.OPENAPI_SPEC }}            
+          wget http://localhost:8080/v3/api-docs --output-document ${{ env.OPENAPI_SPEC }}
 
       - name: Publish API spec
         uses: actions/upload-artifact@v3
@@ -97,7 +97,7 @@ jobs:
     name: Release
     if: github.ref == 'refs/heads/main'
     needs:
-      - build-and-test
+      - test
       - image-check
     runs-on: ubuntu-latest
     steps:
@@ -130,8 +130,6 @@ jobs:
           tags: ${{ env.BUILD_TAG }}
           cache-from: type=gha
           cache-to: type=gha
-          build-args: |
-            BUILD_VERSION=${{ env.BUILD_VERSION }}
 
       - name: Remove old releases
         uses: snok/container-retention-policy@v1
