@@ -87,7 +87,7 @@ jobs:
           username: ${{ github.REPOSITORY_OWNER }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build image
+      - name: Build
         uses: docker/build-push-action@v2
         with:
           context: .
@@ -98,7 +98,7 @@ jobs:
           cache-from: type=registry,ref=${{ env.BUILD_NAME }}:latest
           cache-to: type=inline
 
-      - name: Run image
+      - name: Run container
         env:
           spring_datasource_url=: dbc:postgresql://postgres:5432/postgres
         run: |
