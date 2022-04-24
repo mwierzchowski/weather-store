@@ -9,16 +9,6 @@ plugins {
     id 'com.gorylenko.gradle-git-properties' version '2.4.0'
 }
 
-repositories {
-    mavenCentral()
-}
-
-dependencyManagement {
-    imports {
-        mavenBom(SpringBootPlugin.BOM_COORDINATES)
-    }
-}
-
 dependencies {
     // Annotation processors
     annotationProcessor 'org.projectlombok:lombok'
@@ -50,10 +40,25 @@ dependencies {
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 }
 
+dependencyManagement {
+    imports {
+        mavenBom(SpringBootPlugin.BOM_COORDINATES)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
 test {
     useJUnitPlatform()
+    maxParallelForks = 4
+    reports {
+        html.required = (System.getenv('CI_BUILD') ?: 'false').toBoolean()
+        junitXml.required = false
+    }
     jacoco {
-        enabled = (System.getenv('TEST_COVERAGE') ?: 'false').toBoolean()
+        enabled = (System.getenv('CI_BUILD') ?: 'false').toBoolean()
     }
 }
 
