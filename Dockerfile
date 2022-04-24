@@ -6,7 +6,6 @@ ARG LAYERS_DIR
 RUN mkdir ${LAYERS_DIR}
 ADD . /app
 WORKDIR /app
-RUN who am i
 RUN echo $HOME
 RUN --mount=type=cache,target=/${HOME}/.gradle \
     --mount=type=cache,target=.gradle \
