@@ -5,7 +5,7 @@ FROM eclipse-temurin:${JAVA_VERSION}-jdk-alpine AS builder
 ARG LAYERS_DIR
 RUN mkdir ${LAYERS_DIR}
 WORKDIR /app
-RUN --mount=type=cache,target=/root/.gradle \
+RUN --mount=type=cache,target=/root/.gradle,rw \
     --mount=type=bind,source=.git,target=/app/.git \
     --mount=type=bind,source=gradle,target=/app/gradle \
     --mount=type=bind,source=src,target=/app/src \
