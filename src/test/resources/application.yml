@@ -1,6 +1,5 @@
 # Loggers
 logging.level:
-  root: INFO
   org.hibernate.SQL: DEBUG
   com.github.mwierzchowski: DEBUG
 
