@@ -59,7 +59,7 @@ test {
     useJUnitPlatform()
     maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
     jacoco {
-        enabled = (environment['ci_build'] ?: 'true').toBoolean()
+        enabled = (environment['ci_build'] ?: 'false').toBoolean()
     }
 }
 
