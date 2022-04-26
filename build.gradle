@@ -50,6 +50,10 @@ repositories {
     mavenCentral()
 }
 
+java {
+    sourceCompatibility = 15
+}
+
 test {
     useJUnitPlatform()
     maxParallelForks = 4
