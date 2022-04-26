@@ -57,24 +57,15 @@ java {
 
 test {
     useJUnitPlatform()
-    maxParallelForks = 4
-    reports {
-        html.required = (environment['ci_build'] ?: 'false').toBoolean()
-        junitXml.required = false
-    }
+    maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
     jacoco {
-        enabled = (environment['ci_build'] ?: 'false').toBoolean()
+        enabled = (environment['ci_build'] ?: 'true').toBoolean()
     }
-}
-
-jacoco {
-    toolVersion = '0.8.8'
 }
 
 jacocoTestReport {
     reports {
         xml.required = true
-        html.required = false
     }
 }
 
@@ -84,7 +75,7 @@ bootRun {
 }
 
 dockerCompose {
-    useComposeFiles = ['etc/docker-compose.srv.yml']
     projectName = project.name
     waitForTcpPorts = false
+    useComposeFiles = ['etc/docker-compose.srv.yml']
 }
