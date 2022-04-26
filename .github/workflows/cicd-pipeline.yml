@@ -28,10 +28,12 @@ jobs:
 
       - name: Test
         env:
-          CI_BUILD: true
-          spring_profiles_active: int
+          ci_build: true
+          spring_profiles_active: ci
         run: |
-          ./gradlew clean check jacocoTestReport -x generateGitProperties --console=plain
+          ./gradlew check jacocoTestReport \
+            -x generateGitProperties \
+            --console=plain
 
       - name: Publish test report
         uses: actions/upload-artifact@v3

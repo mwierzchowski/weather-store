@@ -15,7 +15,7 @@ spring:
     format_sql: true
 
 ---
-spring.config.activate.on-profile: int
+spring.config.activate.on-profile: ci
 
 # Database (real)
 spring:

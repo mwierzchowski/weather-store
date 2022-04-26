@@ -58,11 +58,11 @@ test {
     useJUnitPlatform()
     maxParallelForks = 4
     reports {
-        html.required = (environment['CI_BUILD'] ?: 'false').toBoolean()
+        html.required = (environment['ci_build'] ?: 'false').toBoolean()
         junitXml.required = false
     }
     jacoco {
-        enabled = (environment['CI_BUILD'] ?: 'false').toBoolean()
+        enabled = (environment['ci_build'] ?: 'false').toBoolean()
     }
 }
 
