@@ -51,7 +51,7 @@ repositories {
 }
 
 java {
-    sourceCompatibility = 15
+    sourceCompatibility = 17
 }
 
 test {
