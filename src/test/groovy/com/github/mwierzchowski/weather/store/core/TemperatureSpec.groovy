@@ -6,7 +6,7 @@ import static com.github.mwierzchowski.weather.store.core.Temperature.Unit.C
 import static com.github.mwierzchowski.weather.store.core.Temperature.Unit.F
 import static com.github.mwierzchowski.weather.store.core.Temperature.Unit.K
 
-class TemperatureTest extends Specification {
+class TemperatureSpec extends Specification {
     def "Converts between units"() {
         given:
         Temperature temperature = new Temperature().tap {

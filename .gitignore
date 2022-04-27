@@ -1,12 +1,10 @@
-### Maven ###
-target/
-pom.xml.tag
-pom.xml.releaseBackup
-pom.xml.versionsBackup
-pom.xml.next
-release.properties
-dependency-reduced-pom.xml
-buildNumber.properties
+### Gradle
+.gradle
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+.gradletasknamecache
+config/
 
 ### STS ###
 .apt_generated
@@ -21,8 +19,9 @@ bin/
 !**/src/test/**/bin/
 
 ### IntelliJ IDEA ###
+out/
+src/main/generated/
 .idea/
-!/.idea/runConfigurations/
 *.iws
 *.iml
 *.ipr

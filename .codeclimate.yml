@@ -14,6 +14,7 @@ plugins:
 
 exclude_patterns:
   - .github/
-  - .run/
   - etc/
+  - gradlew
+  - gradlew.bat
 

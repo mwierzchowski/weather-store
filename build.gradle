@@ -1,0 +1,81 @@
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
+
+plugins {
+    id 'java'
+    id 'groovy'
+    id 'jacoco'
+    id 'org.springframework.boot' version '2.6.7'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'com.gorylenko.gradle-git-properties' version '2.4.0'
+    id "com.avast.gradle.docker-compose" version "0.15.2"
+}
+
+dependencyManagement {
+    imports {
+        mavenBom(SpringBootPlugin.BOM_COORDINATES)
+    }
+}
+
+dependencies {
+    // Annotation processors
+    annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+
+    // REST
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.8'
+
+    // Database
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.liquibase:liquibase-core'
+    implementation 'org.postgresql:postgresql'
+    testImplementation 'com.h2database:h2'
+
+    // Telemetry
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    // Various
+    compileOnly 'org.projectlombok:lombok'
+    implementation 'org.mapstruct:mapstruct:1.4.2.Final'
+
+    // Testing support
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.spockframework:spock-spring:2.1-groovy-3.0'
+
+    // Development support
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+}
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    targetCompatibility = 17
+}
+
+test {
+    useJUnitPlatform()
+    maxParallelForks = Runtime.runtime.availableProcessors()
+    jacoco {
+        enabled = (environment['ci_build'] ?: 'false').toBoolean()
+    }
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+    }
+}
+
+bootRun {
+    environment = ['spring.profiles.active' : 'dev']
+    tasks.bootRun.dependsOn(composeUp)
+}
+
+dockerCompose {
+    projectName = project.name
+    waitForTcpPorts = false
+    useComposeFiles = ['etc/docker-compose.srv.yml']
+}
