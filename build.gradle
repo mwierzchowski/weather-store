@@ -52,12 +52,12 @@ repositories {
 }
 
 java {
-    sourceCompatibility = 17
+    targetCompatibility = 17
 }
 
 test {
     useJUnitPlatform()
-    maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+    maxParallelForks = Runtime.runtime.availableProcessors()
     jacoco {
         enabled = (environment['ci_build'] ?: 'false').toBoolean()
     }
