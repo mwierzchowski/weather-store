@@ -48,9 +48,9 @@ jobs:
           coverageLocations: ${{ github.WORKSPACE }}/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
 
   Release:
-#    if: github.ref == 'refs/heads/main'
-#    needs:
-#      - Build
+    if: github.ref == 'refs/heads/main'
+    needs:
+      - Build
     runs-on: ubuntu-latest
     env:
       IMAGE: ghcr.io/${{ github.REPOSITORY }}:v${{ github.RUN_NUMBER }}
