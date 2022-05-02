@@ -55,6 +55,13 @@ jobs:
     env:
       IMAGE: ghcr.io/${{ github.REPOSITORY }}:v${{ github.RUN_NUMBER }}
       IMAGE_LATEST: ghcr.io/${{ github.REPOSITORY }}:latest
+    services:
+      postgres:
+        image: postgres:13.1-alpine
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_PASSWORD: postgres
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -84,6 +91,29 @@ jobs:
       - name: Build image
         run: |
           ./gradlew bootBuildImage --imageName ${{ env.IMAGE }} --console=plain
+
+      - name: Run container
+        run: |
+          docker run --network host -d ${{ env.IMAGE }}
+
+      - name: Health check
+        run: |
+          docker run --network host curlimages/curl:7.82.0 \
+            http://localhost:8080/actuator/health \
+            --retry-all-errors \
+            --retry-delay 1 \
+            --retry 20 \
+            --connect-timeout 5
+
+      - name: Download API spec
+        run: |
+          wget http://localhost:8080/v3/api-docs.yaml --output-document ${{ env.OPENAPI_SPEC }}
+
+      - name: Publish API spec
+        uses: actions/upload-artifact@v3
+        with:
+          name: openapi.yaml
+          path: ${{ env.OPENAPI_SPEC }}
 
       - name: Publish image
         run: |
