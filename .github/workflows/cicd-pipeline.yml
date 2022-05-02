@@ -106,6 +106,12 @@ jobs:
             --retry 20 \
             --connect-timeout 5
 
+      - name: Publish image
+        run: |
+          docker tag ${{ env.IMAGE }} ${{ env.IMAGE_LATEST }}
+          docker push ${{ env.IMAGE }}
+          docker push ${{ env.IMAGE_LATEST }}
+
       - name: Download API spec
         run: |
           wget http://localhost:8080/v3/api-docs.yaml --output-document ${{ env.API_SPEC }}
@@ -115,12 +121,6 @@ jobs:
         with:
           name: API spec
           path: ${{ env.API_SPEC }}
-
-      - name: Publish image
-        run: |
-          docker tag ${{ env.IMAGE }} ${{ env.IMAGE_LATEST }}
-          docker push ${{ env.IMAGE }}
-          docker push ${{ env.IMAGE_LATEST }}
 
       - name: Clean up images
         uses: snok/container-retention-policy@v1
