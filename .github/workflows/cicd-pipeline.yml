@@ -55,6 +55,7 @@ jobs:
     env:
       IMAGE: ghcr.io/${{ github.REPOSITORY }}:v${{ github.RUN_NUMBER }}
       IMAGE_LATEST: ghcr.io/${{ github.REPOSITORY }}:latest
+      API_SPEC: ${{ github.WORKSPACE }}/openapi.yaml
     services:
       postgres:
         image: postgres:13.1-alpine
@@ -107,13 +108,13 @@ jobs:
 
       - name: Download API spec
         run: |
-          wget http://localhost:8080/v3/api-docs.yaml --output-document ${{ env.OPENAPI_SPEC }}
+          wget http://localhost:8080/v3/api-docs.yaml --output-document ${{ env.API_SPEC }}
 
       - name: Publish API spec
         uses: actions/upload-artifact@v3
         with:
-          name: openapi.yaml
-          path: ${{ env.OPENAPI_SPEC }}
+          name: API spec
+          path: ${{ env.API_SPEC }}
 
       - name: Publish image
         run: |
