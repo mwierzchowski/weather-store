@@ -18,7 +18,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Java
+      - name: Set up Java
         uses: actions/setup-java@v3
         with:
           java-version: '17'
@@ -61,7 +61,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Java
+      - name: Set up Java
         uses: actions/setup-java@v3
         with:
           java-version: '17'
