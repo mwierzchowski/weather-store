@@ -53,8 +53,8 @@ jobs:
       - Build
     runs-on: ubuntu-latest
     env:
-      IMAGE: ${{ secrets.REPO_LOGIN }}/${{ github.REPOSITORY }}:v${{ github.RUN_NUMBER }}
-      IMAGE_LATEST: ${{ secrets.REPO_LOGIN }}/${{ github.REPOSITORY }}:latest
+      IMAGE: ${{ secrets.REPO_LOGIN }}/${{ github.event.repository.name }}:v${{ github.RUN_NUMBER }}
+      IMAGE_LATEST: ${{ secrets.REPO_LOGIN }}/${{ github.event.repository.name }}:latest
       API_SPEC: ${{ github.WORKSPACE }}/openapi.yaml
     services:
       postgres:
@@ -82,10 +82,11 @@ jobs:
           username: ${{ github.REPOSITORY_OWNER }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
-#      - name: Login to Container Registry
-#        uses: docker/login-action@v1
-#        with:
-#          username: ${{ secrets.REPO_LOGIN }}
+      - name: Login to Container Registry
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.REPO_LOGIN }}
+          password: ${{ secrets.REPO_PASSWORD }}
 
       - name: Build image
         run: |
@@ -120,12 +121,12 @@ jobs:
           name: API spec
           path: ${{ env.API_SPEC }}
 
-      - name: Clean up images
-        uses: snok/container-retention-policy@v1
-        with:
-          image-names: ${{ github.event.repository.name }}
-          cut-off: 1 second ago UTC+1
-          account-type: personal
-          keep-at-least: 3
-          skip-tags: latest
-          token: ${{ secrets.PACKAGES_PAT }}
+#      - name: Clean up images
+#        uses: snok/container-retention-policy@v1
+#        with:
+#          image-names: ${{ github.event.repository.name }}
+#          cut-off: 1 second ago UTC+1
+#          account-type: personal
+#          keep-at-least: 3
+#          skip-tags: latest
+#          token: ${{ secrets.PACKAGES_PAT }}
