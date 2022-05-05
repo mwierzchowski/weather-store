@@ -1,9 +1,6 @@
 services:
   postgres:
     image: postgres:13.1-alpine
-    networks:
-      dev_network:
-        aliases: [database]
     ports:
       - 5432:5432
     environment:
@@ -11,22 +8,5 @@ services:
     volumes:
       - database_data:/var/lib/postgresql/data
 
-  pg-admin4:
-    image: dpage/pgadmin4:6.7
-    networks:
-      dev_network:
-    ports:
-      - 81:80
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=admin@pgadmin.com
-      - PGADMIN_DEFAULT_PASSWORD=admin
-    volumes:
-      - pgadmin_data:/var/lib/pgadmin
-      - ./pgadmin4.json:/pgadmin4/servers.json:ro
-
 volumes:
   database_data:
-  pgadmin_data:
-
-networks:
-  dev_network:
