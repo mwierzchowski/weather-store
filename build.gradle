@@ -52,7 +52,7 @@ repositories {
 }
 
 java {
-    targetCompatibility = 17
+    sourceCompatibility = 17
 }
 
 test {
