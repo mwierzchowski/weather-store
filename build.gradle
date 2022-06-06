@@ -18,7 +18,7 @@ dependencyManagement {
 dependencies {
     // Annotation processors
     annotationProcessor 'org.projectlombok:lombok'
-    annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.1.Final'
 
     // REST
     implementation 'org.springframework.boot:spring-boot-starter-web'
